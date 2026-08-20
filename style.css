@@ -77,6 +77,9 @@ html {
   scroll-behavior: smooth;
   font-size: 16px;
   -webkit-font-smoothing: antialiased;
+  width: 100%;
+  max-width: 100%;
+  overflow-x: hidden;
 }
 
 body {
@@ -85,6 +88,8 @@ body {
   color: var(--neutral-700);
   line-height: 1.65;
   overflow-x: hidden;
+  width: 100%;
+  max-width: 100%;
 }
 
 img {
@@ -1161,7 +1166,7 @@ button, input, select, textarea {
 
 .projects-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(340px, 1fr));
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 340px), 1fr));
   gap: 28px;
 }
 
@@ -1189,6 +1194,18 @@ button, input, select, textarea {
   overflow: hidden;
 }
 
+.project-img-wrapper img {
+  width: 100%;
+  height: 100%;
+  display: block;
+  object-fit: cover;
+  transition: transform var(--transition-normal);
+}
+
+.project-card:hover .project-img-wrapper img {
+  transform: scale(1.035);
+}
+
 .project-tag-badge {
   position: absolute;
   top: 14px; left: 14px;
@@ -1201,6 +1218,7 @@ button, input, select, textarea {
   font-size: 0.75rem;
   font-weight: 700;
   text-transform: uppercase;
+  z-index: 1;
 }
 
 .project-body {
@@ -1705,10 +1723,6 @@ button, input, select, textarea {
   transform: scale(1.1);
 }
 
-.float-zalo {
-  background: #0068FF;
-}
-
 .float-phone {
   background: var(--accent-green);
   animation: pulsePhone 2s infinite;
@@ -1770,7 +1784,7 @@ button, input, select, textarea {
 
 .mobile-bottom-grid {
   display: grid;
-  grid-template-columns: 1fr 1fr 1.4fr;
+  grid-template-columns: 1fr 1.4fr;
   gap: 10px;
 }
 
@@ -1789,10 +1803,6 @@ button, input, select, textarea {
 
 .mob-call {
   background: var(--accent-green);
-}
-
-.mob-zalo {
-  background: #0068FF;
 }
 
 .mob-quote {
@@ -2212,4 +2222,81 @@ button, input, select, textarea {
 .spin-apply-btn:hover {
   box-shadow: 0 4px 16px rgba(249, 115, 22, 0.5);
   transform: translateY(-2px);
+}
+
+/* Keep the mobile layout centered and prevent horizontal page drift. */
+@media (max-width: 480px) {
+  .container {
+    width: 100%;
+    max-width: 100%;
+    margin-inline: auto;
+    padding-inline: 16px;
+  }
+
+  .navbar {
+    width: 100%;
+  }
+
+  .nav-container {
+    gap: 10px;
+  }
+
+  .brand-wrapper {
+    min-width: 0;
+    flex-shrink: 1;
+  }
+
+  .brand-text-block {
+    display: none;
+  }
+
+  .hero-grid,
+  .pain-grid,
+  .solutions-grid,
+  .calc-box,
+  .blueprint-container-box,
+  .projects-grid,
+  .benefits-grid,
+  .process-grid,
+  .footer-grid {
+    width: 100%;
+    min-width: 0;
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  .hero-grid > *,
+  .calc-box > *,
+  .blueprint-container-box > *,
+  .projects-grid > *,
+  .footer-grid > * {
+    min-width: 0;
+  }
+
+  .hero-cta-group,
+  .hero-trust-list,
+  .project-filter-tabs {
+    justify-content: center;
+  }
+
+  .hero-cta-group .btn {
+    width: 100%;
+    max-width: 100%;
+  }
+
+  .calc-metrics-grid {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  .wheel-stage-container,
+  #luckyWheelCanvas {
+    width: min(280px, 100%);
+    height: auto;
+    aspect-ratio: 1;
+  }
+
+  .spin-modal-content {
+    width: calc(100% - 24px);
+    max-width: calc(100% - 24px);
+    padding: 30px 18px;
+  }
 }
