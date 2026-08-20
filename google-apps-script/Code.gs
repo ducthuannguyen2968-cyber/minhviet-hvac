@@ -31,11 +31,12 @@ function doPost(e) {
 
     const now = new Date();
     const projectLabel = projectTypeLabel_(payload.projectType);
+    const phoneText = clean_(payload.phone);
     leadsSheet.appendRow([
       leadId,
       now,
       clean_(payload.fullName),
-      clean_(payload.phone),
+      phoneText,
       projectLabel,
       clean_(payload.area),
       clean_(payload.notes),
@@ -50,6 +51,7 @@ function doPost(e) {
 
     const row = leadsSheet.getLastRow();
     leadsSheet.getRange(row, 2).setNumberFormat('yyyy-mm-dd hh:mm');
+    leadsSheet.getRange(row, 4).setNumberFormat('@').setValue(phoneText);
     leadsSheet.getRange(row, 1, 1, 14).setWrap(true).setVerticalAlignment('top');
 
     const recipient = clean_(configSheet.getRange('B2').getValue());
