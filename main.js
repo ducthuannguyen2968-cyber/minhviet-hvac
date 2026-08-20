@@ -262,7 +262,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const maxFileSize = window.MINH_VIET_CONFIG?.maxFileSizeBytes || 4 * 1024 * 1024;
     if (file.size > maxFileSize) {
       fileInput.value = '';
-      window.alert('Tệp vượt quá 4MB. Vui lòng chọn tệp nhỏ hơn hoặc gửi bản vẽ dung lượng lớn qua Zalo.');
+      window.alert('Tệp vượt quá 4MB. Vui lòng chọn tệp nhỏ hơn hoặc gọi hotline 09345.06191 để được hỗ trợ gửi bản vẽ.');
       return;
     }
     const defaultContent = dropzone.querySelector('.upload-content-default');
