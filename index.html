@@ -62,6 +62,7 @@
           <li><a href="#hero" class="nav-link active">Trang Chủ</a></li>
           <li><a href="#pain-points" class="nav-link">Vấn Đề</a></li>
           <li><a href="#solutions" class="nav-link">Giải Pháp</a></li>
+          <li><a href="#products" class="nav-link">Sản Phẩm</a></li>
           <li><a href="#calculator" class="nav-link">Tính Tải BTU</a></li>
           <li><a href="#projects" class="nav-link">Dự Án</a></li>
           <li><a href="#benefits" class="nav-link">Lợi Ích</a></li>
@@ -99,6 +100,7 @@
         <li><a href="#hero" class="drawer-link active">Trang Chủ</a></li>
         <li><a href="#pain-points" class="drawer-link">Vấn Đề Không Khí</a></li>
         <li><a href="#solutions" class="drawer-link">Giải Pháp & Dịch Vụ</a></li>
+        <li><a href="#products" class="drawer-link">Sản Phẩm Daikin</a></li>
         <li><a href="#calculator" class="drawer-link">Tính Tải BTU & Chi Phí</a></li>
         <li><a href="#projects" class="drawer-link">Dự Án Tiêu Biểu</a></li>
         <li><a href="#benefits" class="drawer-link">5 Lợi Ích Vượt Trội</a></li>
@@ -339,6 +341,33 @@
           </div>
           <a href="#gui-ban-ve" class="btn btn-outline-mv" style="border-color: var(--mv-sky); color: var(--mv-sky); width: 100%;">Báo Giá Gói Multi</a>
         </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ================= DAIKIN PRODUCT CATALOG ================= -->
+  <section class="section-padding products-section" id="products">
+    <div class="container">
+      <div class="section-header reveal-on-scroll">
+        <span class="section-tag">Danh Mục Thiết Bị Chính Hãng</span>
+        <h2 class="section-title">Sản Phẩm Điều Hòa Không Khí Daikin</h2>
+        <p class="section-subtitle">Danh mục 19 sản phẩm Daikin gồm điều hòa treo tường, âm trần cassette và âm trần nối ống gió.</p>
+      </div>
+
+      <div class="product-filter-tabs reveal-on-scroll" role="group" aria-label="Lọc sản phẩm Daikin">
+        <button type="button" class="product-filter-btn active" data-product-filter="all">Tất Cả</button>
+        <button type="button" class="product-filter-btn" data-product-filter="wall">Treo Tường</button>
+        <button type="button" class="product-filter-btn" data-product-filter="inverter">Inverter</button>
+        <button type="button" class="product-filter-btn" data-product-filter="two-way">Hai Chiều</button>
+        <button type="button" class="product-filter-btn" data-product-filter="cassette">Cassette</button>
+        <button type="button" class="product-filter-btn" data-product-filter="duct">Nối Ống Gió</button>
+      </div>
+
+      <div class="product-grid" id="productGrid" aria-live="polite"></div>
+
+      <div class="product-catalog-footer reveal-on-scroll">
+        <button type="button" class="btn btn-outline-mv" id="showAllProductsBtn">Xem Toàn Bộ 19 Sản Phẩm</button>
+        <p class="product-price-note">Giá trên website là giá tham khảo và có thể thay đổi theo chính sách hãng, thời điểm đặt hàng và phạm vi vật tư lắp đặt.</p>
       </div>
     </div>
   </section>
@@ -816,6 +845,7 @@
         <div class="footer-col">
           <h5>Về Chúng Tôi</h5>
           <ul class="footer-links">
+            <li><a href="#products">Sản phẩm Daikin</a></li>
             <li><a href="#projects">Dự án đã triển khai</a></li>
             <li><a href="#process">Quy trình làm việc</a></li>
             <li><a href="#benefits">Cam kết chất lượng</a></li>
