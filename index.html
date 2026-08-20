@@ -554,21 +554,22 @@
             <p>Vui lòng điền thông tin bên dưới, kỹ sư trưởng Minh Việt sẽ liên hệ tư vấn chuyên sâu.</p>
           </div>
 
-          <form id="quoteForm">
+              <form id="quoteForm" novalidate>
+                <input type="text" id="formWebsite" name="website" tabindex="-1" autocomplete="off" aria-hidden="true" style="position:absolute;left:-9999px;opacity:0;pointer-events:none;">
             <div class="form-grid">
               <div class="form-group">
                 <label class="form-label">Họ và tên của bạn <span class="req">*</span></label>
-                <input type="text" id="formFullName" class="form-input" placeholder="Ví dụ: Nguyễn Văn A" required>
+                <input type="text" id="formFullName" name="fullName" class="form-input" placeholder="Ví dụ: Nguyễn Văn A" autocomplete="name" required>
               </div>
 
               <div class="form-group">
                 <label class="form-label">Số điện thoại / Zalo <span class="req">*</span></label>
-                <input type="tel" id="formPhone" class="form-input" placeholder="Ví dụ: 0988 123 456" required>
+                <input type="tel" id="formPhone" name="phone" class="form-input" placeholder="Ví dụ: 0988 123 456" autocomplete="tel" inputmode="tel" required>
               </div>
 
               <div class="form-group">
                 <label class="form-label">Loại công trình</label>
-                <select class="form-select" id="formProjectType">
+                <select class="form-select" id="formProjectType" name="projectType">
                   <option value="biet-thu">Biệt thự / Villa</option>
                   <option value="penthouse">Penthouse / Căn hộ cao cấp</option>
                   <option value="nha-pho">Nhà phố / Liền kề</option>
@@ -580,7 +581,7 @@
 
               <div class="form-group">
                 <label class="form-label">Diện tích ước tính (m²)</label>
-                <input type="text" id="formArea" class="form-input" placeholder="Ví dụ: 250m²">
+                <input type="text" id="formArea" name="area" class="form-input" placeholder="Ví dụ: 250m²">
               </div>
 
               <!-- Drag and Drop Upload Box -->
@@ -592,7 +593,7 @@
                   <div class="upload-content-default">
                     <svg class="upload-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="17 8 12 3 7 8"/><line x1="12" y1="3" x2="12" y2="15"/></svg>
                     <div class="upload-text-main">Kéo thả bản vẽ vào đây hoặc Nhấn để chọn tệp</div>
-                    <div class="upload-text-sub">Hỗ trợ file PDF, CAD (.dwg), Ảnh JPG/PNG, File nén .ZIP (Tối đa 50MB)</div>
+                    <div class="upload-text-sub">Hỗ trợ PDF, CAD (.dwg), JPG/PNG, ZIP (tối đa 4MB). File lớn hơn vui lòng gửi qua Zalo.</div>
                   </div>
 
                   <div class="file-preview-pill" id="filePreview">
@@ -607,13 +608,14 @@
 
               <div class="form-group full-width">
                 <label class="form-label">Ghi chú hoặc Yêu cầu đặc biệt</label>
-                <textarea class="form-textarea" id="formNotes" rows="2" placeholder="Ví dụ: Ưu tiên thiết bị Daikin, cần thêm hệ thống cấp khí tươi cho 3 phòng ngủ..."></textarea>
+                <textarea class="form-textarea" id="formNotes" name="notes" rows="2" placeholder="Ví dụ: Ưu tiên thiết bị Daikin, cần thêm hệ thống cấp khí tươi cho 3 phòng ngủ..."></textarea>
               </div>
             </div>
 
             <button type="submit" class="btn btn-orange btn-lg" style="width: 100%;">
               🚀 GỬI BẢN VẼ & NHẬN PHƯƠNG ÁN 2D TỐI ƯU
             </button>
+            <p id="quoteFormError" role="alert" aria-live="polite" style="display:none;margin-top:12px;color:#B91C1C;font-weight:600;text-align:center;"></p>
           </form>
         </div>
 
@@ -856,6 +858,7 @@
   </div>
 
   <!-- JavaScript Controller -->
+  <script src="app-config.js"></script>
   <script src="main.js"></script>
 </body>
 </html>
