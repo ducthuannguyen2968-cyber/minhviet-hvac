@@ -259,6 +259,12 @@ document.addEventListener('DOMContentLoaded', () => {
   }
 
   function handleFileSelected(file) {
+    const maxFileSize = window.MINH_VIET_CONFIG?.maxFileSizeBytes || 4 * 1024 * 1024;
+    if (file.size > maxFileSize) {
+      fileInput.value = '';
+      window.alert('Tệp vượt quá 4MB. Vui lòng chọn tệp nhỏ hơn hoặc gửi bản vẽ dung lượng lớn qua Zalo.');
+      return;
+    }
     const defaultContent = dropzone.querySelector('.upload-content-default');
     if (defaultContent) defaultContent.style.display = 'none';
     if (filePreview && fileNameDisplay) {
@@ -283,35 +289,84 @@ document.addEventListener('DOMContentLoaded', () => {
     }
   });
 
-  // 7. Form Submission & Luxury Success Modal
+  // 7. Form Submission to Netlify Function & Google Sheets
   const quoteForm = document.getElementById('quoteForm');
   const successModal = document.getElementById('successModal');
   const successModalCloseBtn = document.getElementById('successModalCloseBtn');
 
+  function fileToBase64(file) {
+    return new Promise((resolve, reject) => {
+      const reader = new FileReader();
+      reader.onload = () => resolve(String(reader.result).split(',')[1] || '');
+      reader.onerror = () => reject(new Error('Không thể đọc tệp đính kèm.'));
+      reader.readAsDataURL(file);
+    });
+  }
+
   if (quoteForm) {
-    quoteForm.addEventListener('submit', (e) => {
+    quoteForm.addEventListener('submit', async (e) => {
       e.preventDefault();
-      
+
+      const errorBox = document.getElementById('quoteFormError');
+      if (errorBox) {
+        errorBox.style.display = 'none';
+        errorBox.textContent = '';
+      }
+
+      if (!quoteForm.checkValidity()) {
+        quoteForm.reportValidity();
+        return;
+      }
+
       const submitBtn = quoteForm.querySelector('button[type="submit"]');
       const originalText = submitBtn.innerHTML;
-      
+
       submitBtn.disabled = true;
       submitBtn.innerHTML = `⏳ Đang gửi hồ sơ tới kỹ sư Minh Việt...`;
 
-      setTimeout(() => {
-        submitBtn.disabled = false;
-        submitBtn.innerHTML = originalText;
-        
-        // Open luxury modal
-        if (successModal) {
-          successModal.classList.add('show');
+      try {
+        const selectedFile = fileInput?.files?.[0] || null;
+        const payload = {
+          fullName: document.getElementById('formFullName')?.value.trim() || '',
+          phone: document.getElementById('formPhone')?.value.trim() || '',
+          projectType: document.getElementById('formProjectType')?.value || '',
+          area: document.getElementById('formArea')?.value.trim() || '',
+          notes: document.getElementById('formNotes')?.value.trim() || '',
+          website: document.getElementById('formWebsite')?.value || '',
+          source: window.location.href,
+          file: selectedFile ? {
+            name: selectedFile.name,
+            type: selectedFile.type || 'application/octet-stream',
+            size: selectedFile.size,
+            base64: await fileToBase64(selectedFile),
+          } : null,
+        };
+
+        const endpoint = window.MINH_VIET_CONFIG?.leadEndpoint || '/.netlify/functions/submit-lead';
+        const response = await fetch(endpoint, {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify(payload),
+        });
+        const result = await response.json().catch(() => ({}));
+        if (!response.ok || !result.ok) {
+          throw new Error(result.message || 'Hệ thống chưa nhận được yêu cầu.');
         }
-        
+
+        if (successModal) successModal.classList.add('show');
         quoteForm.reset();
         if (filePreview) filePreview.style.display = 'none';
-        const defaultContent = dropzone.querySelector('.upload-content-default');
+        const defaultContent = dropzone?.querySelector('.upload-content-default');
         if (defaultContent) defaultContent.style.display = 'block';
-      }, 900);
+      } catch (error) {
+        if (errorBox) {
+          errorBox.textContent = `${error.message} Vui lòng gọi 09345.06191 để được hỗ trợ ngay.`;
+          errorBox.style.display = 'block';
+        }
+      } finally {
+        submitBtn.disabled = false;
+        submitBtn.innerHTML = originalText;
+      }
     });
   }
 
