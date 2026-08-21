@@ -446,7 +446,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const maxFileSize = window.MINH_VIET_CONFIG?.maxFileSizeBytes || 4 * 1024 * 1024;
     if (file.size > maxFileSize) {
       fileInput.value = '';
-      window.alert('Tệp vượt quá 4MB. Vui lòng chọn tệp nhỏ hơn hoặc gọi hotline 09345.06191 để được hỗ trợ gửi bản vẽ.');
+      window.alert('Tệp vượt quá 4MB. Vui lòng chọn tệp nhỏ hơn hoặc gọi hotline 0934 506 191 để được hỗ trợ gửi bản vẽ.');
       return;
     }
     const defaultContent = dropzone.querySelector('.upload-content-default');
@@ -537,6 +537,7 @@ document.addEventListener('DOMContentLoaded', () => {
           throw new Error(result.message || 'Hệ thống chưa nhận được yêu cầu.');
         }
 
+        if (window.gtag) gtag('event', 'gui_form_bao_gia_thanh_cong');
         if (successModal) successModal.classList.add('show');
         quoteForm.reset();
         if (filePreview) filePreview.style.display = 'none';
@@ -544,7 +545,7 @@ document.addEventListener('DOMContentLoaded', () => {
         if (defaultContent) defaultContent.style.display = 'block';
       } catch (error) {
         if (errorBox) {
-          errorBox.textContent = `${error.message} Vui lòng gọi 09345.06191 để được hỗ trợ ngay.`;
+          errorBox.textContent = `${error.message} Vui lòng gọi 0934 506 191 để được hỗ trợ ngay.`;
           errorBox.style.display = 'block';
         }
       } finally {
@@ -630,6 +631,31 @@ document.addEventListener('DOMContentLoaded', () => {
           });
         }
       }
+    });
+  });
+
+});
+
+// ==========================================================================
+// ĐO LƯỜNG GOOGLE ANALYTICS 4
+// Ghi nhận 2 hành động liên hệ quan trọng nhất. Sự kiện gửi form thành công
+// được bắn ngay tại chỗ hiện popup báo thành công ở phần 7 phía trên.
+// ==========================================================================
+document.addEventListener('DOMContentLoaded', () => {
+
+  function track(name, params) {
+    if (window.gtag) gtag('event', name, params || {});
+  }
+
+  document.querySelectorAll('a[href^="tel:"]').forEach((a) => {
+    a.addEventListener('click', () => {
+      track('bam_hotline', { vi_tri: a.className || 'khac' });
+    });
+  });
+
+  document.querySelectorAll('a[href*="zalo.me"]').forEach((a) => {
+    a.addEventListener('click', () => {
+      track('bam_zalo', { vi_tri: a.className || 'khac' });
     });
   });
 

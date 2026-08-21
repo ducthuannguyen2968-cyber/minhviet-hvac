@@ -2644,3 +2644,120 @@ button, input, select, textarea {
     line-height: 1.25;
   }
 }
+
+/* ==========================================================================
+   BỔ SUNG THÁNG 08/2026 — GÓI SỬA ƯU TIÊN 1
+   Nút Zalo · Ô đồng ý dữ liệu · Dòng pháp nhân footer · Liên kết liên hệ
+   ========================================================================== */
+
+/* --- Liên kết hotline / email ở topbar và footer --- */
+.topbar-link{
+  color: inherit;
+  text-decoration: none;
+}
+.topbar-link:hover{
+  text-decoration: underline;
+}
+.footer-contact-link{
+  color: inherit;
+  text-decoration: none;
+}
+.footer-contact-link:hover{
+  color: #38BDF8;
+  text-decoration: underline;
+}
+
+/* --- Nút Zalo nổi --- */
+.float-zalo-group{
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+.float-zalo{
+  background: #0068FF;
+  color: #FFFFFF;
+  font-weight: 800;
+  font-size: 0.82rem;
+  letter-spacing: .02em;
+  text-decoration: none;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.float-zalo:hover{
+  background: #0055D4;
+  color: #FFFFFF;
+}
+.float-zalo-label{
+  background: #0068FF;
+  color: #FFFFFF;
+  font-size: 0.82rem;
+  font-weight: 700;
+  padding: 6px 12px;
+  border-radius: 999px;
+  white-space: nowrap;
+  box-shadow: 0 6px 18px -8px rgba(0, 104, 255, .8);
+}
+
+/* --- Nút Zalo trên thanh mobile --- */
+.mob-zalo{
+  background: #0068FF;
+  color: #FFFFFF;
+}
+
+@media (max-width: 768px){
+  /* Trên điện thoại đã có nút Zalo ở thanh dưới cùng nên ẩn nút nổi
+     để không che nội dung và không trùng lặp. */
+  .float-zalo-group{ display: none; }
+
+  .mobile-bottom-grid{ grid-template-columns: repeat(3, 1fr); }
+  .mobile-bottom-grid .mob-btn{
+    font-size: 0.76rem;
+    padding: 10px 4px;
+    gap: 4px;
+    line-height: 1.25;
+  }
+}
+
+/* --- Ô đồng ý xử lý dữ liệu cá nhân --- */
+.mv-consent{
+  display: flex;
+  gap: 10px;
+  align-items: flex-start;
+  font-size: 0.85rem;
+  line-height: 1.55;
+  color: var(--neutral-600, #475569);
+  cursor: pointer;
+}
+.mv-consent input[type="checkbox"]{
+  width: 18px;
+  height: 18px;
+  margin: 2px 0 0;
+  flex: none;
+  accent-color: #0EA5E9;
+  cursor: pointer;
+}
+.mv-consent a{
+  color: #0EA5E9;
+  font-weight: 600;
+}
+
+/* --- Dòng thông tin pháp nhân ở footer --- */
+.footer-legal{
+  font-size: 0.78rem;
+  line-height: 1.75;
+  color: #64748B;
+  margin: 14px 0 0;
+  max-width: 900px;
+}
+.footer-legal b{
+  color: #94A3B8;
+  font-weight: 600;
+}
+.footer-legal a{
+  color: #38BDF8;
+  text-decoration: none;
+}
+.footer-legal a:hover{
+  text-decoration: underline;
+}

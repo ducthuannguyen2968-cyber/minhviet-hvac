@@ -1,0 +1,56 @@
+GOI SUA UU TIEN 1 - WEBSITE MINH VIET HVAC
+Ngay 21/08/2026
+
+CACH DUA LEN GITHUB (khong can biet lap trinh)
+-----------------------------------------------
+1. Mo https://github.com/ducthuannguyen2968-cyber/minhviet-hvac
+2. Bam nut "Add file" -> "Upload files"
+3. Keo TOAN BO cac file trong thu muc nay (ke ca thu muc "assets") tha vao trang
+4. O o "Commit changes", go: Goi sua Uu tien 1
+5. Bam "Commit changes"
+6. Netlify tu dong deploy lai trong 1-2 phut
+
+Cac file trung ten se duoc GHI DE - dung y muon.
+File DOC-DAY-TRUOC.txt nay KHONG can tai len.
+
+
+BA CHO BAT BUOC PHAI DIEN TRUOC KHI COI LA XONG
+------------------------------------------------
+[1] index.html - tim chu G-XXXXXXXXXX (co 2 cho)
+    Thay bang ma do luong Google Analytics 4 that.
+    Lay tai analytics.google.com -> Admin -> Create property -> Web
+
+[2] index.html - tim chu [DIEN MA SO THUE] o cuoi file
+    Dien MST, so giay DKKD, ngay cap, co quan cap, nguoi dai dien.
+
+[3] chinh-sach-bao-mat.html - tim cac chu [dien ...]
+    Dien MST, so DKKD, email chinh thuc, nguoi phu trach du lieu.
+
+
+DA LAM XONG - KHONG CAN LAM GI THEM
+------------------------------------
+- The chia se Zalo/Facebook + anh chia se 1200x630 (assets/og-image.jpg)
+- Favicon cho tab trinh duyet
+- Title rut con 59 ky tu, mo ta con 143 ky tu, them canonical
+- Nut Zalo: goc phai tren may tinh, thanh duoi cung tren dien thoai
+- O tich dong y du lieu ca nhan trong form (chua tich thi khong gui duoc)
+- Trang Chinh sach bao mat
+- Hotline thong nhat 0934 506 191, hotline va email bam duoc
+- robots.txt va sitemap.xml
+- Ma do luong 3 hanh dong: bam hotline, bam Zalo, gui form thanh cong
+
+
+CON LAI PHAI TU LAM (khong the sua bang code)
+----------------------------------------------
+- Anh du an "Nha May Thoi Trang Du Phat" dang la anh cong nha may IVY moda
+- 19 anh san pham Daikin dang la anh muon tu web ban le khac
+Xem chi tiet trong ban ra soat da gui.
+
+
+KIEM TRA SAU KHI DEPLOY
+------------------------
+- Gui link vao mot nhom Zalo noi bo -> phai hien anh va tieu de moi
+  Neu chua hien, vao Facebook Sharing Debugger bam "Scrape Again"
+- Mo trang o cua so an danh -> tab phai hien logo
+- Vao form, chua tich o dong y -> bam gui phai bao loi
+- Vao GA4 -> Reports -> Realtime -> tu bam hotline -> phai thay su kien bam_hotline
