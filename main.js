@@ -189,115 +189,115 @@ document.addEventListener('DOMContentLoaded', () => {
     {
       categories: ['cassette', 'inverter'], label: 'Cassette',
       name: 'Daikin Cassette 1 Chiều Inverter 20.500 BTU', model: 'FCF60CVM / RZF60CV2V',
-      capacity: '20.500 BTU/h', price: '35.260.000 ₫', image: 'assets/products/cassette-fcf-series.jpg',
+      capacity: '20.500 BTU/h', price: '35.260.000 ₫', image: 'assets/products/cassette-fcf-series.webp',
       source: 'https://minhvietco.vn/product/dieu-hoa-am-tran-cassette-daikin-fcf60cvm-rzf60cv2v-20-500btu-loai-1-chieu-inverter/'
     },
     {
       categories: ['duct', 'inverter', 'two-way'], label: 'Nối Ống Gió',
       name: 'Daikin Nối Ống Gió 2 Chiều Inverter 18.000 BTU', model: 'FBA50BVMA9 / RZA50DV2V',
-      capacity: '18.000 BTU/h', price: '29.550.000 ₫', image: 'assets/products/duct-fba50.jpg',
+      capacity: '18.000 BTU/h', price: '29.550.000 ₫', image: 'assets/products/duct-fba50.webp',
       source: 'https://minhvietco.vn/product/dieu-hoa-am-tran-noi-ong-gio-daikin-fba50bvma9-rza50dv2v-17-100btu-h-2-chieu-inverter/'
     },
     {
       categories: ['duct', 'inverter', 'two-way'], label: 'Nối Ống Gió',
       name: 'Daikin Nối Ống Gió 2 Chiều Inverter 20.500 BTU', model: 'FBA60BVMA9 / RZA60DV2V',
-      capacity: '20.500 BTU/h', price: '37.100.000 ₫', image: 'assets/products/duct-fba60.jpg',
+      capacity: '20.500 BTU/h', price: '37.100.000 ₫', image: 'assets/products/duct-fba60.webp',
       source: 'https://minhvietco.vn/product/dieu-hoa-am-tran-noi-ong-gio-daikin-fba60bvma9-rza60dv2v-20-500btu-h-loai-2-chieu-inverter/'
     },
     {
       categories: ['duct', 'inverter', 'two-way'], label: 'Nối Ống Gió',
       name: 'Daikin Nối Ống Gió 2 Chiều Inverter 24.200 BTU', model: 'FBA71BVMA9 / RZA71DV1',
-      capacity: '24.200 BTU/h', price: '38.380.000 ₫', image: 'assets/products/duct-fba71.jpg',
+      capacity: '24.200 BTU/h', price: '38.380.000 ₫', image: 'assets/products/duct-fba71.webp',
       source: 'https://minhvietco.vn/product/dieu-hoa-am-tran-noi-ong-gio-daikin-fba71bvma9-rza71dv1-24-200btu-h-2-chieu-inverter/'
     },
     {
       categories: ['wall'], label: 'Treo Tường 1 Chiều',
       name: 'Daikin Treo Tường 1 Chiều 12.000 BTU', model: 'FTF35XAV1V / RF35XAV1V',
-      capacity: '12.000 BTU/h', price: '9.700.000 ₫', image: 'assets/products/ftf35.jpg',
+      capacity: '12.000 BTU/h', price: '9.700.000 ₫', image: 'assets/products/ftf35.webp',
       source: 'https://minhvietco.vn/product/dieu-hoa-daikin-1-chieu-12000btu-ftf35xav1v-rf35xav1v/'
     },
     {
       categories: ['wall'], label: 'Treo Tường 1 Chiều',
       name: 'Daikin Treo Tường 1 Chiều 18.000 BTU', model: 'FTF50XV1V / RF50XV1V',
-      capacity: '18.000 BTU/h', price: '15.030.000 ₫', image: 'assets/products/ftf50.jpg',
+      capacity: '18.000 BTU/h', price: '15.030.000 ₫', image: 'assets/products/ftf50.webp',
       source: 'https://minhvietco.vn/product/dieu-hoa-daikin-1-chieu-18000btu-ftf50xv1v-rf50xv1v/'
     },
     {
       categories: ['wall'], label: 'Treo Tường 1 Chiều',
       name: 'Daikin Treo Tường 1 Chiều 9.000 BTU', model: 'FTF25XAV1V / RF25XAV1V',
-      capacity: '9.000 BTU/h', price: '7.630.000 ₫', image: 'assets/products/ftf25.jpg',
+      capacity: '9.000 BTU/h', price: '7.630.000 ₫', image: 'assets/products/ftf25.webp',
       source: 'https://minhvietco.vn/product/dieu-hoa-daikin-1-chieu-9000btu-ftf25xav1v-rf25xav1v/'
     },
     {
       categories: ['wall', 'inverter'], label: 'Treo Tường Inverter',
       name: 'Daikin 1 Chiều Inverter 12.000 BTU', model: 'FTKB35XVMV / RKB35XVMV',
-      capacity: '12.000 BTU/h', price: '11.100.000 ₫', image: 'assets/products/ftkb35.jpg',
+      capacity: '12.000 BTU/h', price: '11.100.000 ₫', image: 'assets/products/ftkb35.webp',
       source: 'https://minhvietco.vn/product/dieu-hoa-daikin-1-chieu-inverter-12000btu-ftkb35xvmv-rkb35xvmv/'
     },
     {
       categories: ['wall', 'inverter'], label: 'Treo Tường Inverter',
       name: 'Daikin 1 Chiều Inverter 18.000 BTU', model: 'FTKB50XVMV / RKB50XVMV',
-      capacity: '18.000 BTU/h', price: '17.260.000 ₫', image: 'assets/products/ftkb50.jpg',
+      capacity: '18.000 BTU/h', price: '17.260.000 ₫', image: 'assets/products/ftkb50.webp',
       source: 'https://minhvietco.vn/product/dieu-hoa-daikin-1-chieu-inverter-18000btu-ftkb50xvmv-rkb50xvmv/'
     },
     {
       categories: ['wall', 'inverter'], label: 'Treo Tường Inverter',
       name: 'Daikin 1 Chiều Inverter 9.000 BTU', model: 'FTKB25XVMV / RKB25XVMV',
-      capacity: '9.000 BTU/h', price: '9.130.000 ₫', image: 'assets/products/ftkb25.jpg',
+      capacity: '9.000 BTU/h', price: '9.130.000 ₫', image: 'assets/products/ftkb25.webp',
       source: 'https://minhvietco.vn/product/dieu-hoa-daikin-1-chieu-inverter-9000btu-ftkb25xvmv-rkb25xvmv/'
     },
     {
       categories: ['wall', 'inverter', 'two-way'], label: 'Treo Tường 2 Chiều',
       name: 'Daikin 2 Chiều Inverter 12.000 BTU', model: 'FTHF35VAVMV / RHF35VAVMV',
-      capacity: '12.000 BTU/h', price: '13.870.000 ₫', image: 'assets/products/fthf35.jpg',
+      capacity: '12.000 BTU/h', price: '13.870.000 ₫', image: 'assets/products/fthf35.webp',
       source: 'https://minhvietco.vn/product/dieu-hoa-daikin-2-chieu-12000btu-fthf35vavmv-rhf35vavmv/'
     },
     {
       categories: ['wall', 'inverter', 'two-way'], label: 'Treo Tường 2 Chiều',
       name: 'Daikin 2 Chiều Inverter 18.000 BTU', model: 'FTHF50VVMV / RHF50VVMV',
-      capacity: '18.000 BTU/h', price: '20.820.000 ₫', image: 'assets/products/fthf50.jpg',
+      capacity: '18.000 BTU/h', price: '20.820.000 ₫', image: 'assets/products/fthf50.webp',
       source: 'https://minhvietco.vn/product/dieu-hoa-daikin-2-chieu-18000btu-fthf50vvmv-rhf5vvmv/'
     },
     {
       categories: ['wall', 'inverter', 'two-way'], label: 'Treo Tường 2 Chiều',
       name: 'Daikin 2 Chiều Inverter 9.000 BTU', model: 'FTHF25VAVMV / RHF25VAVMV',
-      capacity: '9.000 BTU/h', price: '11.270.000 ₫', image: 'assets/products/fthf25.jpg',
+      capacity: '9.000 BTU/h', price: '11.270.000 ₫', image: 'assets/products/fthf25.webp',
       source: 'https://minhvietco.vn/product/dieu-hoa-daikin-2-chieu-9000btu-fthf25vavmv-rhf25vavmv/'
     },
     {
       categories: ['cassette', 'inverter'], label: 'Cassette',
       name: 'Daikin Cassette 1 Chiều Inverter 34.000 BTU', model: 'FCF100CVM / RZF100CVM',
-      capacity: '34.000 BTU/h', price: '43.560.000 ₫', image: 'assets/products/cassette-fcf-series.jpg',
+      capacity: '34.000 BTU/h', price: '43.560.000 ₫', image: 'assets/products/cassette-fcf-series.webp',
       source: 'https://minhvietco.vn/product/dieu-hoa-daikin-am-tran-cassette-fcf100cvm-rzf100cvm-34-000btu-h-loai-1-chieu-inverter/'
     },
     {
       categories: ['cassette', 'inverter'], label: 'Cassette',
       name: 'Daikin Cassette 1 Chiều Inverter 34.000 BTU', model: 'FCF100CVM / RZF100CYM',
-      capacity: '34.000 BTU/h', price: '45.950.000 ₫', image: 'assets/products/cassette-fcf-series.jpg',
+      capacity: '34.000 BTU/h', price: '45.950.000 ₫', image: 'assets/products/cassette-fcf-series.webp',
       source: 'https://minhvietco.vn/product/dieu-hoa-daikin-am-tran-cassette-fcf100cvm-rzf100cym-34-000btu-h-loai-1-chieu-inverter/'
     },
     {
       categories: ['cassette', 'inverter'], label: 'Cassette',
       name: 'Daikin Cassette 1 Chiều Inverter 42.000 BTU', model: 'FCF125CVM / RZF125CVM',
-      capacity: '42.000 BTU/h', price: '47.450.000 ₫', image: 'assets/products/cassette-fcf-series.jpg',
+      capacity: '42.000 BTU/h', price: '47.450.000 ₫', image: 'assets/products/cassette-fcf-series.webp',
       source: 'https://minhvietco.vn/product/dieu-hoa-daikin-am-tran-cassette-fcf125cvm-rzf125cvm-42-000btu-h-loai-1-chieu-inverter/'
     },
     {
       categories: ['cassette', 'inverter'], label: 'Cassette',
       name: 'Daikin Cassette 1 Chiều Inverter 47.800 BTU', model: 'FCF140CVM / RZF140CVM',
-      capacity: '47.800 BTU/h', price: '51.600.000 ₫', image: 'assets/products/cassette-fcf140.jpg',
+      capacity: '47.800 BTU/h', price: '51.600.000 ₫', image: 'assets/products/cassette-fcf140.webp',
       source: 'https://minhvietco.vn/product/dieu-hoa-daikin-am-tran-cassette-fcf140cvm-rzf140cvm-47-800btu-h-loai-1-chieu-inverter/'
     },
     {
       categories: ['cassette', 'inverter'], label: 'Cassette',
       name: 'Daikin Cassette 1 Chiều Inverter 17.100 BTU', model: 'FCF50CVM / RZF50CV2V',
-      capacity: '17.100 BTU/h', price: '28.300.000 ₫', image: 'assets/products/cassette-fcf50.jpg',
+      capacity: '17.100 BTU/h', price: '28.300.000 ₫', image: 'assets/products/cassette-fcf50.webp',
       source: 'https://minhvietco.vn/product/dieu-hoa-daikin-am-tran-cassette-fcf50cvm-rzf50cv2v-17-100btu-loai-1-chieu-inverter/'
     },
     {
       categories: ['cassette', 'inverter'], label: 'Cassette',
       name: 'Daikin Cassette 1 Chiều Inverter 24.000 BTU', model: 'FCF71CVM / RZF71CV2V',
-      capacity: '24.000 BTU/h', price: '36.750.000 ₫', image: 'assets/products/cassette-fcf71.jpg',
+      capacity: '24.000 BTU/h', price: '36.750.000 ₫', image: 'assets/products/cassette-fcf71.webp',
       source: 'https://minhvietco.vn/product/dieu-hoa-daikin-am-tran-cassette-fcf71cvm-rzf71cv2v-24000btu-h-loai-1-chieu-inverter/'
     }
   ];
@@ -526,7 +526,7 @@ document.addEventListener('DOMContentLoaded', () => {
           } : null,
         };
 
-        const endpoint = window.MINH_VIET_CONFIG?.leadEndpoint || '/.netlify/functions/submit-lead';
+        const endpoint = window.MINH_VIET_CONFIG?.leadEndpoint || '/api/submit-lead';
         const response = await fetch(endpoint, {
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },

@@ -1,0 +1,4 @@
+# Chan truy cap ma nguon duoi dang file tinh (ca Cloudflare Pages lan Netlify)
+/google-apps-script/*   /   404
+/netlify/*              /   404
+/functions/*            /   404
