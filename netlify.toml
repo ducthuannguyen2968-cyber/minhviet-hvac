@@ -13,6 +13,13 @@
   status = 200
   force = true
 
+# Webhook nhan thanh toan tu SePay (xac thuc bang Authorization: Apikey ...).
+[[redirects]]
+  from = "/api/sepay-webhook"
+  to = "/.netlify/functions/sepay-webhook"
+  status = 200
+  force = true
+
 # Khong phuc vu ma nguon ham Cloudflare duoi dang file tinh.
 [[redirects]]
   from = "/functions/*"
