@@ -8,7 +8,8 @@ const client = createClient({
 let schemaReady = null;
 function ensureSchema() {
   if (!schemaReady) {
-    schemaReady = client.batch([
+    schemaReady = (async () => {
+      await client.batch([
       `CREATE TABLE IF NOT EXISTS products (
         id INTEGER PRIMARY KEY AUTOINCREMENT,
         name TEXT NOT NULL,
@@ -31,10 +32,20 @@ function ensureSchema() {
         customer_id INTEGER NOT NULL REFERENCES customers(id),
         product_id INTEGER NOT NULL REFERENCES products(id),
         amount INTEGER NOT NULL,
-        status TEXT NOT NULL CHECK (status IN ('pending', 'paid', 'completed', 'cancelled')) DEFAULT 'pending',
+        status TEXT NOT NULL CHECK (status IN ('pending', 'success', 'completed', 'cancelled')) DEFAULT 'pending',
         order_date TEXT NOT NULL DEFAULT (datetime('now'))
       )`,
-    ], 'write');
+      ], 'write');
+      const schema = await client.execute("SELECT sql FROM sqlite_master WHERE type = 'table' AND name = 'orders'");
+      if (schema.rows[0]?.sql && !schema.rows[0].sql.includes("'success'")) {
+        await client.batch([
+          'ALTER TABLE orders RENAME TO orders_legacy',
+          `CREATE TABLE orders (id INTEGER PRIMARY KEY AUTOINCREMENT, customer_id INTEGER NOT NULL REFERENCES customers(id), product_id INTEGER NOT NULL REFERENCES products(id), amount INTEGER NOT NULL, status TEXT NOT NULL CHECK (status IN ('pending', 'success', 'completed', 'cancelled')) DEFAULT 'pending', order_date TEXT NOT NULL DEFAULT (datetime('now')) )`,
+          "INSERT INTO orders (id, customer_id, product_id, amount, status, order_date) SELECT id, customer_id, product_id, amount, CASE WHEN status = 'paid' THEN 'success' ELSE status END, order_date FROM orders_legacy",
+          'DROP TABLE orders_legacy',
+        ], 'write');
+      }
+    })();
   }
   return schemaReady;
 }
@@ -166,7 +177,7 @@ async function deleteCustomer(id) {
 // ---------- Orders ----------
 // Quy uoc: moi don hang tuong ung 1 don vi san pham (bang orders khong co cot so luong).
 
-const ORDER_STATUSES = ['pending', 'paid', 'completed', 'cancelled'];
+const ORDER_STATUSES = ['pending', 'success', 'completed', 'cancelled'];
 
 const ORDER_SELECT = `
   SELECT orders.*, customers.name AS customer_name, products.name AS product_name, products.type AS product_type

@@ -36,6 +36,15 @@ exports.handler = async (event) => {
   const scriptUrl = process.env.GOOGLE_APPS_SCRIPT_URL || DEFAULT_SCRIPT_URL;
 
   try {
+    const siteUrl = process.env.URL || `https://${event.headers?.host || 'localhost'}`;
+    const paymentResponse = await fetch(new URL('/.netlify/functions/payment-api', siteUrl), {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ type: 'confirm', amount: payload.transferAmount, content: payload.content || payload.description || payload.transferDescription }),
+    });
+    const paymentResult = await paymentResponse.json().catch(() => ({}));
+    if (!paymentResponse.ok || !paymentResult.ok) throw new Error(paymentResult.message || 'Không thể cập nhật đơn hàng.');
+
     const upstream = await fetch(scriptUrl, {
       method: 'POST',
       headers: { 'Content-Type': 'text/plain;charset=utf-8' },
