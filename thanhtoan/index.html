@@ -88,6 +88,15 @@
     color: var(--neutral-600);
   }
   .pay-support a { color: var(--mv-navy); font-weight: 700; text-decoration: none; }
+  .pay-form { text-align: left; margin-bottom: 22px; }
+  .pay-form label { display: block; margin: 10px 0 5px; font-size: .82rem; font-weight: 700; color: var(--mv-navy); }
+  .pay-form input, .pay-form select { width: 100%; box-sizing: border-box; padding: 10px 12px; border: 1px solid var(--neutral-300); border-radius: var(--radius-sm); font: inherit; background: var(--white); }
+  .pay-form .pay-amount-line { margin: 8px 0 0; font-size: .9rem; color: var(--neutral-600); }
+  .pay-form .pay-amount-line b { color: var(--mv-navy); }
+  .pay-form button { width: 100%; margin-top: 14px; padding: 11px; border: 0; border-radius: var(--radius-sm); background: var(--mv-navy); color: var(--white); font-weight: 700; cursor: pointer; }
+  .pay-form button:disabled { opacity: .6; cursor: wait; }
+  .pay-status { display: none; padding: 12px; margin-bottom: 18px; border-radius: var(--radius-sm); background: #ecfdf5; color: #166534; font-weight: 700; }
+  .pay-status.show { display: block; }
   .pay-footer {
     text-align: center;
     padding: 16px;
@@ -107,11 +116,26 @@
     <main class="pay-main">
       <div class="pay-card">
         <h1 class="pay-title">Thanh Toán Chuyển Khoản</h1>
-        <p class="pay-desc">Quét mã QR bằng app ngân hàng hoặc Ví điện tử, tự nhập số tiền và ghi rõ nội dung (họ tên/mã đơn hàng) để Minh Việt xác nhận nhanh.</p>
+        <p class="pay-desc">Chọn món hàng/dịch vụ và điền thông tin để tạo đơn. Sau đó quét mã QR bằng app ngân hàng — số tiền và nội dung chuyển khoản (mã đơn hàng) sẽ được điền sẵn để Minh Việt xác nhận tự động.</p>
+
+        <form class="pay-form" id="paymentForm">
+          <label for="payName">Họ tên</label>
+          <input id="payName" name="fullName" required autocomplete="name">
+          <label for="payContact">Số điện thoại / email</label>
+          <input id="payContact" name="contact" required autocomplete="email">
+          <label for="payItem">Món hàng / dịch vụ</label>
+          <select id="payItem" name="productId" required>
+            <option value="">— Đang tải danh sách sản phẩm… —</option>
+          </select>
+          <p class="pay-amount-line" id="payAmountLine"></p>
+          <button type="submit" id="paySubmitBtn" disabled>Tạo đơn và hiển thị mã QR</button>
+        </form>
+        <div class="pay-status" id="payStatus" role="status"></div>
 
         <img
           class="pay-qr"
-          src="https://vietqr.app/img?acc=17169927&bank=ACB&holder=NGUYEN%20DUC%20THUAN&template=compact&showinfo=true&store=Minh%20Viet%20HVAC"
+          id="payQr"
+          src="https://vietqr.app/img?acc=17169927&bank=ACB&amount=2000&addInfo=THANH%20TOAN%20MINH%20VIET&accountName=NGUYEN%20DUC%20THUAN&template=compact&showinfo=true&store=Minh%20Viet%20HVAC"
           alt="Mã QR thanh toán chuyển khoản Minh Việt HVAC"
         >
 
@@ -139,6 +163,89 @@
   </div>
 
   <script>
+    const paymentForm = document.getElementById('paymentForm');
+    const payQr = document.getElementById('payQr');
+    const payStatus = document.getElementById('payStatus');
+    const payItem = document.getElementById('payItem');
+    const payAmountLine = document.getElementById('payAmountLine');
+    const paySubmitBtn = document.getElementById('paySubmitBtn');
+    let statusTimer;
+
+    const money = (n) => Number(n || 0).toLocaleString('vi-VN') + 'đ';
+
+    function renderSelectedAmount() {
+      const opt = payItem.selectedOptions[0];
+      const price = opt && opt.value ? opt.dataset.price : '';
+      payAmountLine.innerHTML = price ? `Số tiền cần chuyển: <b>${money(price)}</b>` : '';
+    }
+
+    function showLoadError(message) {
+      payItem.innerHTML = `<option value="">${message}</option>`;
+      paySubmitBtn.disabled = true;
+      payStatus.textContent = message + ' Vui lòng liên hệ hotline 0934 506 191 để được hỗ trợ.';
+      payStatus.style.background = '#fef2f2';
+      payStatus.style.color = '#991b1b';
+      payStatus.classList.add('show');
+    }
+
+    async function loadProducts() {
+      try {
+        const res = await fetch('/api/payment-api?list=products');
+        const data = await res.json().catch(() => ({}));
+        if (!res.ok || !data.ok) {
+          showLoadError('Chưa kết nối được hệ thống thanh toán.');
+          return;
+        }
+        const products = (data.products || []).filter((p) => Number(p.price) > 0);
+        if (!products.length) {
+          showLoadError('Chưa có sản phẩm/dịch vụ nào để thanh toán.');
+          return;
+        }
+        payItem.innerHTML = '<option value="">— Chọn món hàng / dịch vụ —</option>' +
+          products.map((p) => `<option value="${p.id}" data-price="${p.price}">${p.name} — ${money(p.price)}</option>`).join('');
+        paySubmitBtn.disabled = false;
+      } catch (error) {
+        showLoadError('Không tải được danh sách sản phẩm.');
+      }
+    }
+
+    payItem.addEventListener('change', renderSelectedAmount);
+    loadProducts();
+
+    function watchPayment(order) {
+      clearInterval(statusTimer);
+      payStatus.textContent = `Đơn ${order.orderCode}: vui lòng chuyển ${Number(order.amount).toLocaleString('vi-VN')}đ với nội dung ${order.orderCode}.`;
+      payStatus.classList.add('show');
+      payQr.src = `https://vietqr.app/img?acc=17169927&bank=ACB&amount=${encodeURIComponent(order.amount)}&addInfo=${encodeURIComponent(order.orderCode)}&accountName=NGUYEN%20DUC%20THUAN&template=compact&showinfo=true&store=Minh%20Viet%20HVAC`;
+      statusTimer = setInterval(async () => {
+        const response = await fetch(`/api/payment-api?orderId=${encodeURIComponent(order.orderId)}`);
+        const current = await response.json().catch(() => ({}));
+        if (current.status === 'success') {
+          clearInterval(statusTimer);
+          payStatus.textContent = 'Chuyển khoản thành công. Cảm ơn bạn đã thanh toán cho Minh Việt HVAC!';
+        }
+      }, 5000);
+    }
+
+    paymentForm.addEventListener('submit', async (event) => {
+      event.preventDefault();
+      const button = paymentForm.querySelector('button');
+      button.disabled = true;
+      try {
+        const data = Object.fromEntries(new FormData(paymentForm));
+        const response = await fetch('/api/payment-api', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ fullName: data.fullName, phone: data.contact, productId: Number(data.productId) }) });
+        const order = await response.json();
+        if (!response.ok || !order.ok) throw new Error(order.message || 'Không thể tạo đơn.');
+        watchPayment(order);
+        paymentForm.style.display = 'none';
+      } catch (error) {
+        payStatus.textContent = error.message;
+        payStatus.style.background = '#fef2f2';
+        payStatus.style.color = '#991b1b';
+        payStatus.classList.add('show');
+      } finally { button.disabled = false; }
+    });
+
     document.getElementById('payCopyBtn').addEventListener('click', async () => {
       const btn = document.getElementById('payCopyBtn');
       const accNumber = document.getElementById('payAccNumber').textContent.trim();
