@@ -59,13 +59,48 @@ async function createPaymentOrder(body) {
   return json(201, { ok: true, orderId: order.id, orderCode: `MV${String(order.id).padStart(6, '0')}`, amount: order.amount, status: order.status, productName: product.name });
 }
 
+// Tach ma don tu noi dung CK. Ngan hang hay chen dau cach / dau gach / chu khac
+// ("MV 000123", "mv-000123", "CK MV000123 ..."), co khi bo so 0 dau -> phai
+// chuan hoa (viet hoa, bo het ky tu khong phai chu-so) roi match linh hoat.
+function extractOrderId(content) {
+  const normalized = String(content || '').toUpperCase().replace(/[^A-Z0-9]/g, '');
+  const match = normalized.match(/MV0*(\d{1,9})/);
+  return match ? Number(match[1]) : null;
+}
+
 async function confirmPayment(body) {
-  const content = text(body.content, 500).toUpperCase();
+  const orderId = extractOrderId(body.content);
   const amount = Number(body.amount);
-  const match = content.match(/MV\d{6}/);
-  if (!match || !Number.isFinite(amount)) return json(200, { ok: true, matched: false });
-  const orderId = Number(match[0].slice(2));
-  const result = await client.execute({ sql: "UPDATE orders SET status = 'success' WHERE id = ? AND amount = ? AND status = 'pending'", args: [orderId, amount] });
+  if (!orderId) return json(200, { ok: true, matched: false, reason: 'no_order_code' });
+
+  const order = (await client.execute({ sql: 'SELECT id, amount, status FROM orders WHERE id = ?', args: [orderId] })).rows[0];
+  if (!order) return json(200, { ok: true, matched: false, reason: 'order_not_found', orderId });
+
+  // SePay goi lai webhook toi 7 lan -> da thanh toan roi thi bao "khop" de khong bao loi gia.
+  if (order.status === 'success' || order.status === 'completed') {
+    return json(200, { ok: true, matched: true, already: true, orderId });
+  }
+  if (order.status !== 'pending') {
+    return json(200, { ok: true, matched: false, reason: `order_${order.status}`, orderId });
+  }
+
+  // Chap nhan chuyen dung hoac du hon (phi ngan hang / khach lam tron len); chi tu choi khi chuyen thieu.
+  const expected = Number(order.amount);
+  if (!Number.isFinite(amount) || amount + 0.5 < expected) {
+    return json(200, {
+      ok: true,
+      matched: false,
+      reason: 'amount_mismatch',
+      orderId,
+      expected,
+      received: Number.isFinite(amount) ? amount : null,
+    });
+  }
+
+  const result = await client.execute({
+    sql: "UPDATE orders SET status = 'success' WHERE id = ? AND status = 'pending'",
+    args: [orderId],
+  });
   return json(200, { ok: true, matched: result.rowsAffected > 0, orderId });
 }
 

@@ -44,6 +44,17 @@ exports.handler = async (event) => {
     });
     const paymentResult = await paymentResponse.json().catch(() => ({}));
     if (!paymentResponse.ok || !paymentResult.ok) throw new Error(paymentResult.message || 'Không thể cập nhật đơn hàng.');
+    if (!paymentResult.matched) {
+      // Van ghi nhan vao Google Sheet + email o buoc duoi, nhung log ro de con doi chieu thu cong.
+      console.error('sepay-webhook: khong khop don hang', {
+        reason: paymentResult.reason,
+        orderId: paymentResult.orderId,
+        expected: paymentResult.expected,
+        received: paymentResult.received,
+        content: payload.content || payload.description || payload.transferDescription,
+        transferAmount: payload.transferAmount,
+      });
+    }
 
     const upstream = await fetch(scriptUrl, {
       method: 'POST',
