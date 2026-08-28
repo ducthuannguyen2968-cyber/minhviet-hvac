@@ -4,6 +4,7 @@
 
 [functions]
   node_bundler = "esbuild"
+  external_node_modules = ["@libsql/client"]
 
 # Dung chung mot duong dan /api/submit-lead voi Cloudflare Pages,
 # de doi nen tang khong phai sua lai ma nguon.
