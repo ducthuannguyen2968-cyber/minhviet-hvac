@@ -1758,6 +1758,7 @@ document.addEventListener('DOMContentLoaded', () => {
         const payload = {
           fullName: document.getElementById('formFullName')?.value.trim() || '',
           phone: document.getElementById('formPhone')?.value.trim() || '',
+          email: document.getElementById('formEmail')?.value.trim() || '',
           projectType: document.getElementById('formProjectType')?.value || '',
           area: document.getElementById('formArea')?.value.trim() || '',
           notes: document.getElementById('formNotes')?.value.trim() || '',
