@@ -5,6 +5,103 @@ const client = createClient({
   authToken: process.env.TURSO_AUTH_TOKEN,
 });
 
+// --- Email xac nhan don hang qua Resend ---
+// API key doc tu bien moi truong Netlify RESEND_API_KEY (KHONG hardcode - Secrets Scanning se chan deploy).
+const RESEND_ENDPOINT = 'https://api.resend.com/emails';
+const RESEND_API_KEY = process.env.RESEND_API_KEY;
+const EMAIL_RE = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+// Nguoi gui: dia chi thuoc domain rieng minhviethvac.asia.
+const ORDER_MAIL_FROM = process.env.RESEND_ORDER_FROM || 'Cơ Điện Lạnh Minh Việt <cskh@minhviethvac.asia>';
+const HOTLINE = '0934 506 191';
+const OFFICE_ADDRESS = 'Số 15B, ngõ 191 đường Giáp Bát, P. Giáp Bát, Q. Hoàng Mai, Hà Nội';
+const PAYMENT_URL = process.env.PAYMENT_URL || 'https://minhviethvac.asia/thanhtoan/';
+
+function escapeHtml(value) {
+  return String(value == null ? '' : value)
+    .replace(/&/g, '&amp;')
+    .replace(/</g, '&lt;')
+    .replace(/>/g, '&gt;')
+    .replace(/"/g, '&quot;');
+}
+
+// 1.234.567 đ (dau cham ngan cach hang nghin theo kieu VN, khong phu thuoc ICU).
+function formatVnd(n) {
+  return String(Math.round(Number(n) || 0)).replace(/\B(?=(\d{3})+(?!\d))/g, '.') + ' đ';
+}
+
+async function sendViaResend(mail) {
+  if (!RESEND_API_KEY) return;
+  const res = await fetch(RESEND_ENDPOINT, {
+    method: 'POST',
+    headers: { Authorization: `Bearer ${RESEND_API_KEY}`, 'Content-Type': 'application/json' },
+    body: JSON.stringify(mail),
+  });
+  if (!res.ok) {
+    const detail = await res.text().catch(() => '');
+    throw new Error(`Resend ${res.status}: ${detail}`);
+  }
+}
+
+// Email xac nhan don hang - giong van theo bang brand_voice (gan gui, cau ngan, "chin chu / trach nhiem").
+// Goi ngay sau khi admin tao don moi. Chi gui khi khach co email hop le.
+async function sendOrderConfirmationEmail({ order, customer, product }) {
+  if (!RESEND_API_KEY) return;
+  const email = String(customer.email || '').trim();
+  if (!email || !EMAIL_RE.test(email)) return;
+
+  const isTest = /\+test/i.test(email.split('@')[0]);
+  const orderCode = `MV${String(order.id).padStart(6, '0')}`;
+  const name = escapeHtml(customer.name || 'anh/chị');
+  const phone = escapeHtml(customer.phone || '');
+  const productName = escapeHtml(product.name);
+  const amountText = formatVnd(order.amount);
+
+  const deliveryByType = {
+    physical:
+      `<p><b>Nhận hàng:</b> Đội ngũ Minh Việt sẽ gọi anh/chị theo số <b>${phone}</b> trong vòng 24 giờ làm việc ` +
+      `để xác nhận địa chỉ và hẹn lịch giao. Anh/chị cũng có thể nhận trực tiếp tại văn phòng: ` +
+      `${escapeHtml(OFFICE_ADDRESS)}.</p>`,
+    service:
+      `<p><b>Triển khai:</b> Kỹ sư phụ trách sẽ liên hệ số <b>${phone}</b> trong vòng 24 giờ làm việc ` +
+      `để hẹn lịch xuống công trình khảo sát / thi công.</p>`,
+    digital:
+      `<p><b>Nhận tài liệu:</b> Bản vẽ / tài liệu sẽ được gửi tới chính email này trong vòng 24 giờ làm việc. ` +
+      `Nếu chưa thấy, anh/chị kiểm tra hộp thư spam hoặc nhắn hotline ${HOTLINE}.</p>`,
+  };
+  const delivery = deliveryByType[product.type] || deliveryByType.service;
+
+  const paidNote = ['success', 'completed'].includes(order.status)
+    ? '<p>Minh Việt đã ghi nhận thanh toán cho đơn này.</p>'
+    : `<p>Đơn sẽ được xử lý ngay khi Minh Việt xác nhận thanh toán. Cần thông tin chuyển khoản, ` +
+      `anh/chị mở <a href="${PAYMENT_URL}">${PAYMENT_URL}</a> hoặc gọi hotline ${HOTLINE}.</p>`;
+
+  const html = `
+    <div style="font-family:Arial,Helvetica,sans-serif;font-size:15px;line-height:1.65;color:#1f2937;max-width:560px">
+      <p>Chào ${name},</p>
+      <p>Cảm ơn anh/chị đã tin tưởng <b>Cơ Điện Lạnh Minh Việt</b>. Minh Việt đã nhận đơn hàng của anh/chị:</p>
+      <table cellpadding="6" style="border-collapse:collapse;font-size:14px">
+        <tr><td><b>Mã đơn</b></td><td>${orderCode}</td></tr>
+        <tr><td><b>Sản phẩm</b></td><td>${productName}</td></tr>
+        <tr><td><b>Số tiền</b></td><td><b>${amountText}</b></td></tr>
+        <tr><td><b>Ngày đặt</b></td><td>${escapeHtml(String(order.order_date || ''))}</td></tr>
+      </table>
+      ${delivery}
+      ${paidNote}
+      <p>Hơn chục năm trong nghề, tụi em luôn tâm niệm làm gì cũng phải chỉn chu và có trách nhiệm tới cùng —
+         đơn hàng của anh/chị cũng vậy.</p>
+      <p>Cần hỗ trợ, anh/chị gọi hotline <b>${HOTLINE}</b> nhé.</p>
+      <p style="margin-top:24px">Trân trọng,<br><b>Cơ Điện Lạnh Minh Việt</b><br>
+         Hotline / Zalo ${HOTLINE} &middot; <a href="https://minhviethvac.asia">minhviethvac.asia</a></p>
+    </div>`;
+
+  await sendViaResend({
+    from: ORDER_MAIL_FROM,
+    to: [email],
+    subject: `${isTest ? '[TEST] ' : ''}Minh Việt xác nhận đơn hàng ${orderCode} - ${product.name}`,
+    html,
+  });
+}
+
 let schemaReady = null;
 function ensureSchema() {
   if (!schemaReady) {
@@ -139,8 +236,6 @@ async function listCustomers() {
   return rs.rows;
 }
 
-const EMAIL_RE = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-
 function normalizeEmail(value) {
   const email = value === undefined || value === null ? '' : String(value).trim();
   if (email && !EMAIL_RE.test(email)) throw new HttpError(400, 'Địa chỉ email không hợp lệ.');
@@ -240,7 +335,16 @@ async function createOrder(body) {
   await client.batch(statements, 'write');
 
   const rs = await client.execute(`${ORDER_SELECT} ORDER BY orders.id DESC LIMIT 1`);
-  return rs.rows[0];
+  const order = rs.rows[0];
+
+  // Gui email xac nhan don hang cho khach (neu co email). Loi email KHONG lam hong viec tao don.
+  try {
+    await sendOrderConfirmationEmail({ order, customer, product });
+  } catch (mailErr) {
+    console.error('admin-api: gui email xac nhan don that bai', mailErr);
+  }
+
+  return order;
 }
 
 async function updateOrder(id, body) {
