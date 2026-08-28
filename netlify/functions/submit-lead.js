@@ -39,8 +39,8 @@ function ensureCustomersSchema(client) {
         email TEXT,
         registered_at TEXT NOT NULL DEFAULT (datetime('now'))
       )`);
-      const cols = await client.execute('PRAGMA table_info(customers)');
-      if (!cols.rows.some((c) => c.name === 'email')) {
+      const custSchema = await client.execute("SELECT sql FROM sqlite_master WHERE type = 'table' AND name = 'customers'");
+      if (custSchema.rows[0]?.sql && !/\bemail\b/i.test(String(custSchema.rows[0].sql))) {
         await client.execute('ALTER TABLE customers ADD COLUMN email TEXT');
       }
     })().catch((e) => { customersSchemaReady = null; throw e; });

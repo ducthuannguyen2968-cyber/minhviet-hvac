@@ -37,8 +37,8 @@ function ensureSchema() {
         order_date TEXT NOT NULL DEFAULT (datetime('now'))
       )`,
       ], 'write');
-      const customerCols = await client.execute("PRAGMA table_info(customers)");
-      if (!customerCols.rows.some((c) => c.name === 'email')) {
+      const custSchema = await client.execute("SELECT sql FROM sqlite_master WHERE type = 'table' AND name = 'customers'");
+      if (custSchema.rows[0]?.sql && !/\bemail\b/i.test(String(custSchema.rows[0].sql))) {
         await client.execute('ALTER TABLE customers ADD COLUMN email TEXT');
       }
 
@@ -51,7 +51,7 @@ function ensureSchema() {
           'DROP TABLE orders_legacy',
         ], 'write');
       }
-    })();
+    })().catch((e) => { schemaReady = null; throw e; });
   }
   return schemaReady;
 }
