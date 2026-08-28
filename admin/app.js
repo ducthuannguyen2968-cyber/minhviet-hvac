@@ -141,7 +141,7 @@ function renderProducts() {
 function renderCustomers() {
   const tbody = document.querySelector('#tblCustomers tbody');
   if (!state.customers.length) {
-    tbody.innerHTML = `<tr class="empty-row"><td colspan="5">Chưa có khách hàng nào.</td></tr>`;
+    tbody.innerHTML = `<tr class="empty-row"><td colspan="6">Chưa có khách hàng nào.</td></tr>`;
     return;
   }
   tbody.innerHTML = state.customers.map((c) => `
@@ -149,6 +149,7 @@ function renderCustomers() {
       <td>${escapeHtml(c.name)}</td>
       <td>${escapeHtml(c.phone)}</td>
       <td>${escapeHtml(c.zalo || '—')}</td>
+      <td>${escapeHtml(c.email || '—')}</td>
       <td>${escapeHtml((c.registered_at || '').replace('T', ' ').slice(0, 16))}</td>
       <td class="row-actions">
         <button class="btn btn-ghost btn-sm" onclick="openCustomerModal(${c.id})">Sửa</button>
@@ -308,9 +309,13 @@ window.openCustomerModal = function (id) {
       <label>Zalo</label>
       <input name="zalo" value="${escapeHtml(c?.zalo || '')}">
     </div>
+    <div class="field">
+      <label>Email</label>
+      <input name="email" type="email" value="${escapeHtml(c?.email || '')}">
+    </div>
   `;
   openModal(c ? 'Sửa khách hàng' : 'Thêm khách hàng', fields, async (fd) => {
-    const body = { name: fd.get('name'), phone: fd.get('phone'), zalo: fd.get('zalo') };
+    const body = { name: fd.get('name'), phone: fd.get('phone'), zalo: fd.get('zalo'), email: fd.get('email') };
     if (c) await api('PUT', `${API}/customers/${c.id}`, body);
     else await api('POST', `${API}/customers`, body);
     await loadAll();
