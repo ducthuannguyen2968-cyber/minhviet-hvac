@@ -1,0 +1,9 @@
+{
+  "name": "minhviet-hvac",
+  "private": true,
+  "version": "1.0.0",
+  "description": "Netlify Functions dependencies cho website Minh Viet HVAC",
+  "dependencies": {
+    "@libsql/client": "^0.15.0"
+  }
+}

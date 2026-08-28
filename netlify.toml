@@ -13,6 +13,13 @@
   status = 200
   force = true
 
+# Admin panel /admin - CRUD san pham/khach hang/don hang, xac thuc bang header x-admin-password.
+[[redirects]]
+  from = "/admin/api/*"
+  to = "/.netlify/functions/admin-api"
+  status = 200
+  force = true
+
 # Webhook nhan thanh toan tu SePay (xac thuc bang Authorization: Apikey ...).
 [[redirects]]
   from = "/api/sepay-webhook"
