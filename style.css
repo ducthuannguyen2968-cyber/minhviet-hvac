@@ -300,16 +300,16 @@ button, input, select, textarea {
   align-items: center;
   justify-content: center;
   list-style: none;
-  gap: clamp(8px, 1.2vw, 18px);
+  gap: clamp(2px, 0.5vw, 8px);
   margin: 0;
   padding: 0;
 }
 
 .nav-link {
   color: rgba(255, 255, 255, 0.88);
-  font-size: 0.9rem;
+  font-size: 0.84rem;
   font-weight: 600;
-  padding: 8px 12px;
+  padding: 8px 8px;
   position: relative;
   white-space: nowrap;
   border-radius: 8px;
@@ -404,7 +404,7 @@ button, input, select, textarea {
 .nav-actions {
   display: flex;
   align-items: center;
-  gap: 12px;
+  gap: 8px;
   flex-shrink: 0;
 }
 
@@ -423,6 +423,18 @@ button, input, select, textarea {
 
 .hamburger-btn:hover {
   background: rgba(255, 255, 255, 0.1);
+}
+
+/* Duoi 1400px, menu + 3 nut hanh dong khong con du cho tren 1 hang
+   (container gioi han 1320px) - chuyen sang menu hamburger som hon
+   muc breakpoint mobile chung (768px) de tranh menu bi tran/chong chu. */
+@media (max-width: 1400px) {
+  .nav-menu, .nav-actions .btn {
+    display: none;
+  }
+  .hamburger-btn {
+    display: inline-flex;
+  }
 }
 
 /* ==========================================================================
@@ -2594,12 +2606,6 @@ button, input, select, textarea {
   }
   .floating-badge {
     display: none;
-  }
-  .nav-menu, .nav-actions .btn {
-    display: none;
-  }
-  .hamburger-btn {
-    display: inline-flex;
   }
   .brand-logo-img-box {
     padding: 6px 12px;
