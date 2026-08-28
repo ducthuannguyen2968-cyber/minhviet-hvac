@@ -1,0 +1,8 @@
+<svg width="400" height="300" viewBox="0 0 400 300" xmlns="http://www.w3.org/2000/svg">
+  <rect width="400" height="300" fill="#EDF6FF"/>
+  <rect x="110" y="110" width="180" height="80" rx="10" fill="#FFFFFF" stroke="#0088CC" stroke-width="3"/>
+  <rect x="128" y="132" width="60" height="8" rx="4" fill="#0088CC"/>
+  <rect x="128" y="150" width="100" height="6" rx="3" fill="#BFE3F7"/>
+  <circle cx="262" cy="150" r="14" fill="#0088CC" opacity="0.85"/>
+  <text x="200" y="228" font-family="Arial, sans-serif" font-size="15" font-weight="700" fill="#7A8AA3" text-anchor="middle">Đang cập nhật hình ảnh</text>
+</svg>

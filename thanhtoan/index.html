@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Thanh Toán Chuyển Khoản - Minh Việt HVAC</title>
+<meta name="description" content="Quét mã QR chuyển khoản thanh toán cho Minh Việt HVAC - Công ty Cổ Phần Cơ Điện Lạnh Minh Việt.">
+<meta name="robots" content="noindex, follow">
+<link rel="icon" href="/favicon.ico">
+<link rel="stylesheet" href="/style.css">
+<style>
+  .pay-page {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    background: var(--neutral-50);
+  }
+  .pay-header {
+    padding: 18px 20px;
+    text-align: center;
+  }
+  .pay-header img { height: 40px; }
+  .pay-main {
+    flex: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 12px 16px 40px;
+  }
+  .pay-card {
+    background: var(--white);
+    border-radius: var(--radius-xl);
+    padding: 32px 26px;
+    max-width: 420px;
+    width: 100%;
+    text-align: center;
+    box-shadow: var(--shadow-xl);
+  }
+  .pay-title {
+    font-size: 1.4rem;
+    font-weight: 800;
+    color: var(--mv-navy);
+    margin-bottom: 8px;
+  }
+  .pay-desc {
+    font-size: 0.92rem;
+    color: var(--neutral-600);
+    line-height: 1.6;
+    margin-bottom: 22px;
+  }
+  .pay-qr {
+    width: 100%;
+    max-width: 280px;
+    height: auto;
+    border-radius: var(--radius-md);
+    border: 1px solid var(--neutral-200);
+    margin: 0 auto 22px;
+  }
+  .pay-info {
+    text-align: left;
+    background: var(--neutral-50);
+    border-radius: var(--radius-md);
+    padding: 14px 16px;
+    margin-bottom: 22px;
+  }
+  .pay-info-row {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 6px 0;
+    font-size: 0.92rem;
+    color: var(--neutral-600);
+  }
+  .pay-info-row b { margin-left: auto; color: var(--mv-navy); }
+  .pay-copy-btn {
+    border: 1px solid var(--neutral-300);
+    background: var(--white);
+    color: var(--mv-navy);
+    font-size: 0.78rem;
+    font-weight: 700;
+    padding: 3px 9px;
+    border-radius: var(--radius-sm);
+    cursor: pointer;
+  }
+  .pay-copy-btn:hover { background: var(--neutral-100); }
+  .pay-support {
+    font-size: 0.85rem;
+    color: var(--neutral-600);
+  }
+  .pay-support a { color: var(--mv-navy); font-weight: 700; text-decoration: none; }
+  .pay-footer {
+    text-align: center;
+    padding: 16px;
+    font-size: 0.78rem;
+    color: var(--neutral-400);
+  }
+</style>
+</head>
+<body>
+  <div class="pay-page">
+    <header class="pay-header">
+      <a href="/">
+        <img src="/assets/logo-minh-viet.webp" alt="Minh Việt HVAC">
+      </a>
+    </header>
+
+    <main class="pay-main">
+      <div class="pay-card">
+        <h1 class="pay-title">Thanh Toán Chuyển Khoản</h1>
+        <p class="pay-desc">Quét mã QR bằng app ngân hàng hoặc Ví điện tử, tự nhập số tiền và ghi rõ nội dung (họ tên/mã đơn hàng) để Minh Việt xác nhận nhanh.</p>
+
+        <img
+          class="pay-qr"
+          src="https://vietqr.app/img?acc=17169927&bank=ACB&holder=NGUYEN%20DUC%20THUAN&template=compact&showinfo=true&store=Minh%20Viet%20HVAC"
+          alt="Mã QR thanh toán chuyển khoản Minh Việt HVAC"
+        >
+
+        <div class="pay-info">
+          <div class="pay-info-row">
+            <span>Ngân hàng</span>
+            <b>ACB (Á Châu)</b>
+          </div>
+          <div class="pay-info-row">
+            <span>Số tài khoản</span>
+            <b id="payAccNumber">17169927</b>
+            <button type="button" class="pay-copy-btn" id="payCopyBtn" aria-label="Sao chép số tài khoản">Sao chép</button>
+          </div>
+          <div class="pay-info-row">
+            <span>Chủ tài khoản</span>
+            <b>NGUYEN DUC THUAN</b>
+          </div>
+        </div>
+
+        <p class="pay-support">Cần hỗ trợ? Gọi hotline <a href="tel:0934506191">0934 506 191</a></p>
+      </div>
+    </main>
+
+    <footer class="pay-footer">© 2026 Công Ty Cổ Phần Cơ Điện Lạnh Minh Việt</footer>
+  </div>
+
+  <script>
+    document.getElementById('payCopyBtn').addEventListener('click', async () => {
+      const btn = document.getElementById('payCopyBtn');
+      const accNumber = document.getElementById('payAccNumber').textContent.trim();
+      try {
+        await navigator.clipboard.writeText(accNumber);
+        btn.textContent = 'Đã chép!';
+      } catch {
+        btn.textContent = 'Lỗi, thử lại';
+      }
+      setTimeout(() => { btn.textContent = 'Sao chép'; }, 1500);
+    });
+  </script>
+</body>
+</html>

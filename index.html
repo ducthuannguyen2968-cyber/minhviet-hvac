@@ -112,10 +112,10 @@
 
       <div class="nav-actions">
         <a href="#khao-sat-nhu-cau" class="btn btn-secondary btn-sm">Khảo Sát Nhanh</a>
-        <button type="button" class="btn btn-secondary btn-sm" id="openPaymentModalBtn">
+        <a href="/thanhtoan" class="btn btn-secondary btn-sm">
           <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="1" y="4" width="22" height="16" rx="2"/><line x1="1" y1="10" x2="23" y2="10"/></svg>
           Thanh Toán
-        </button>
+        </a>
         <a href="#gui-ban-ve" class="btn btn-primary btn-sm">
           <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="17 8 12 3 7 8"/><line x1="12" y1="3" x2="12" y2="15"/></svg>
           Gửi Bản Vẽ Ngay
@@ -157,9 +157,9 @@
       <a href="#gui-ban-ve" class="btn btn-orange btn-sm" style="width: 100%; margin-bottom: 10px;">
         Gửi Bản Vẽ Ngay
       </a>
-      <button type="button" class="btn btn-secondary btn-sm" id="openPaymentModalBtnMobile" style="width: 100%; margin-bottom: 10px;">
+      <a href="/thanhtoan" class="btn btn-secondary btn-sm" style="width: 100%; margin-bottom: 10px;">
         Thanh Toán Chuyển Khoản
-      </button>
+      </a>
       <div style="font-size: 0.8rem; color: var(--neutral-400); text-align: center;">
         Hotline: <a href="tel:0934506191" style="color:#FFF;font-weight:700;text-decoration:none;">0934 506 191</a>
       </div>
@@ -1094,37 +1094,6 @@
     </div>
   </div>
 
-  <!-- ================= PAYMENT QR MODAL ================= -->
-  <div class="payment-modal-overlay" id="paymentModal">
-    <div class="payment-modal-box">
-      <button type="button" class="payment-modal-close" id="paymentModalCloseBtn" aria-label="Đóng">✕</button>
-      <h3 class="payment-modal-title">Thanh Toán Chuyển Khoản</h3>
-      <p class="payment-modal-desc">Quét mã QR bằng app ngân hàng hoặc Ví điện tử, tự nhập số tiền và ghi rõ nội dung (họ tên/mã đơn hàng) để Minh Việt xác nhận nhanh.</p>
-
-      <img
-        class="payment-modal-qr"
-        src="https://vietqr.app/img?acc=17169927&bank=ACB&holder=NGUYEN%20DUC%20THUAN&template=compact&showinfo=true&store=Minh%20Viet%20HVAC"
-        alt="Mã QR thanh toán chuyển khoản Minh Việt HVAC"
-        loading="lazy"
-      >
-
-      <div class="payment-modal-info">
-        <div class="payment-info-row">
-          <span>Ngân hàng</span>
-          <b>ACB (Á Châu)</b>
-        </div>
-        <div class="payment-info-row">
-          <span>Số tài khoản</span>
-          <b id="paymentAccNumber">17169927</b>
-          <button type="button" class="payment-copy-btn" id="paymentCopyBtn" aria-label="Sao chép số tài khoản">Sao chép</button>
-        </div>
-        <div class="payment-info-row">
-          <span>Chủ tài khoản</span>
-          <b>NGUYEN DUC THUAN</b>
-        </div>
-      </div>
-    </div>
-  </div>
 
   <!-- ================= PRODUCT DETAIL MODAL (VRV/VRF) ================= -->
   <div class="product-detail-modal-overlay" id="productDetailModal">

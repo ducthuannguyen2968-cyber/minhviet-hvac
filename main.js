@@ -1598,44 +1598,6 @@ document.addEventListener('DOMContentLoaded', () => {
     }
   });
 
-  // 4f. Modal QR Thanh Toán
-  const paymentModal = document.getElementById('paymentModal');
-  const paymentModalCloseBtn = document.getElementById('paymentModalCloseBtn');
-  const openPaymentModalBtn = document.getElementById('openPaymentModalBtn');
-  const openPaymentModalBtnMobile = document.getElementById('openPaymentModalBtnMobile');
-  const paymentCopyBtn = document.getElementById('paymentCopyBtn');
-  const paymentAccNumber = document.getElementById('paymentAccNumber');
-
-  function openPaymentModal() {
-    paymentModal?.classList.add('show');
-    closeMobileMenu();
-  }
-
-  openPaymentModalBtn?.addEventListener('click', openPaymentModal);
-  openPaymentModalBtnMobile?.addEventListener('click', openPaymentModal);
-
-  paymentModalCloseBtn?.addEventListener('click', () => {
-    paymentModal?.classList.remove('show');
-  });
-
-  paymentModal?.addEventListener('click', (e) => {
-    if (e.target === paymentModal) {
-      paymentModal.classList.remove('show');
-    }
-  });
-
-  paymentCopyBtn?.addEventListener('click', async () => {
-    const accNumber = paymentAccNumber?.textContent?.trim() || '';
-    try {
-      await navigator.clipboard.writeText(accNumber);
-      paymentCopyBtn.textContent = 'Đã chép!';
-      setTimeout(() => { paymentCopyBtn.textContent = 'Sao chép'; }, 1500);
-    } catch (err) {
-      paymentCopyBtn.textContent = 'Lỗi, thử lại';
-      setTimeout(() => { paymentCopyBtn.textContent = 'Sao chép'; }, 1500);
-    }
-  });
-
   // 4d. Chuyển đổi giữa Điều Hòa Cục Bộ và Điều Hòa Trung Tâm VRV/VRF
   const productSegmentButtons = document.querySelectorAll('.product-segment-btn');
   const localAcPanel = document.getElementById('localAcPanel');
