@@ -217,12 +217,29 @@
       payStatus.textContent = `Đơn ${order.orderCode}: vui lòng chuyển ${Number(order.amount).toLocaleString('vi-VN')}đ với nội dung ${order.orderCode}.`;
       payStatus.classList.add('show');
       payQr.src = `https://vietqr.app/img?acc=17169927&bank=ACB&amount=${encodeURIComponent(order.amount)}&addInfo=${encodeURIComponent(order.orderCode)}&accountName=NGUYEN%20DUC%20THUAN&template=compact&showinfo=true&store=Minh%20Viet%20HVAC`;
+      // Tối đa ~20 phút (240 lần x 5s) rồi dừng để khỏi poll vô hạn.
+      let ticks = 0;
       statusTimer = setInterval(async () => {
-        const response = await fetch(`/api/payment-api?orderId=${encodeURIComponent(order.orderId)}`);
-        const current = await response.json().catch(() => ({}));
-        if (current.status === 'success') {
+        ticks += 1;
+        try {
+          const response = await fetch(`/api/payment-api?orderId=${encodeURIComponent(order.orderId)}`);
+          const current = await response.json().catch(() => ({}));
+          if (current.status === 'success' || current.status === 'completed') {
+            clearInterval(statusTimer);
+            payStatus.textContent = 'Chuyển khoản thành công. Cảm ơn bạn đã thanh toán cho Minh Việt HVAC!';
+            return;
+          }
+          if (current.status === 'cancelled') {
+            clearInterval(statusTimer);
+            payStatus.textContent = `Đơn ${order.orderCode} đã bị huỷ. Vui lòng liên hệ hotline 0934 506 191 nếu cần hỗ trợ.`;
+            return;
+          }
+        } catch (_) {
+          // Lỗi mạng tạm thời — thử lại ở lần poll sau.
+        }
+        if (ticks >= 240) {
           clearInterval(statusTimer);
-          payStatus.textContent = 'Chuyển khoản thành công. Cảm ơn bạn đã thanh toán cho Minh Việt HVAC!';
+          payStatus.textContent = `Chưa ghi nhận được chuyển khoản cho đơn ${order.orderCode}. Nếu bạn đã chuyển, vui lòng gọi hotline 0934 506 191 để được đối chiếu.`;
         }
       }, 5000);
     }
