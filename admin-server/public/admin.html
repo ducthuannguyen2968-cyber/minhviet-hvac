@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Admin - Minh Việt HVAC</title>
+<link rel="stylesheet" href="/admin/style.css">
+</head>
+<body>
+  <header class="topbar">
+    <h1>Quản trị nội bộ — Minh Việt HVAC</h1>
+    <p class="topbar-note">Chạy local, dữ liệu lưu trong brain.db — chỉ bạn xem được trên máy này.</p>
+  </header>
+
+  <nav class="tabs">
+    <button class="tab-btn active" data-tab="products">Sản phẩm</button>
+    <button class="tab-btn" data-tab="customers">Khách hàng</button>
+    <button class="tab-btn" data-tab="orders">Đơn hàng</button>
+  </nav>
+
+  <main>
+    <!-- ===== TAB: SẢN PHẨM ===== -->
+    <section id="tab-products" class="tab-panel active">
+      <div class="panel-head">
+        <h2>Sản phẩm</h2>
+        <button class="btn btn-primary" id="btnNewProduct">+ Thêm sản phẩm</button>
+      </div>
+      <div class="table-wrap">
+        <table id="tblProducts">
+          <thead>
+            <tr>
+              <th>Tên</th><th>Loại</th><th>Giá</th><th>Mô tả</th><th>Tồn kho</th><th></th>
+            </tr>
+          </thead>
+          <tbody></tbody>
+        </table>
+      </div>
+    </section>
+
+    <!-- ===== TAB: KHÁCH HÀNG ===== -->
+    <section id="tab-customers" class="tab-panel">
+      <div class="panel-head">
+        <h2>Khách hàng</h2>
+        <button class="btn btn-primary" id="btnNewCustomer">+ Thêm khách hàng</button>
+      </div>
+      <div class="table-wrap">
+        <table id="tblCustomers">
+          <thead>
+            <tr><th>Tên</th><th>Số điện thoại</th><th>Zalo</th><th>Ngày đăng ký</th><th></th></tr>
+          </thead>
+          <tbody></tbody>
+        </table>
+      </div>
+    </section>
+
+    <!-- ===== TAB: ĐƠN HÀNG ===== -->
+    <section id="tab-orders" class="tab-panel">
+      <div class="panel-head">
+        <h2>Đơn hàng</h2>
+        <button class="btn btn-primary" id="btnNewOrder">+ Thêm đơn hàng</button>
+      </div>
+      <p class="hint">Mỗi đơn hàng tính là 1 sản phẩm. Với sản phẩm vật lý, tồn kho sẽ tự động trừ 1 khi tạo đơn và cộng lại khi xoá đơn.</p>
+      <div class="table-wrap">
+        <table id="tblOrders">
+          <thead>
+            <tr><th>Khách hàng</th><th>Sản phẩm</th><th>Số tiền</th><th>Trạng thái</th><th>Ngày mua</th><th></th></tr>
+          </thead>
+          <tbody></tbody>
+        </table>
+      </div>
+    </section>
+  </main>
+
+  <!-- ===== MODAL DÙNG CHUNG ===== -->
+  <div class="modal-overlay" id="modalOverlay">
+    <div class="modal-box">
+      <button class="modal-close" id="modalClose" aria-label="Đóng">✕</button>
+      <h3 id="modalTitle">Tiêu đề</h3>
+      <form id="modalForm"></form>
+    </div>
+  </div>
+
+  <div class="toast" id="toast"></div>
+
+  <script src="/admin/app.js"></script>
+</body>
+</html>

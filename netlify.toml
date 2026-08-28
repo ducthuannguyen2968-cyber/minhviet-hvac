@@ -28,6 +28,12 @@
   status = 200
   force = true
 
+[[redirects]]
+  from = "/api/payment-api"
+  to = "/.netlify/functions/payment-api"
+  status = 200
+  force = true
+
 # Khong phuc vu ma nguon ham Cloudflare duoi dang file tinh.
 [[redirects]]
   from = "/functions/*"

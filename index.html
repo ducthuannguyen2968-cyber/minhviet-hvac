@@ -1,1124 +1,262 @@
 <!DOCTYPE html>
 <html lang="vi">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Điều Hoà Giấu Trần &amp; Cấp Khí Tươi Biệt Thự | Minh Việt HVAC</title>
-  <meta name="description" content="Tư vấn, thiết kế 2D và thi công điều hòa trung tâm VRV/VRF, giấu trần nối ống gió và cấp khí tươi lọc bụi mịn cho biệt thự, penthouse tại Hà Nội.">
-  <link rel="canonical" href="https://minhviethvac.asia/">
-
-  <!-- Favicon -->
-  <link rel="icon" href="/favicon.ico" sizes="32x32">
-  <link rel="apple-touch-icon" href="/apple-touch-icon.png">
-  <meta name="theme-color" content="#071326">
-
-  <!-- Thẻ chia sẻ Zalo / Facebook -->
-  <meta property="og:type" content="website">
-  <meta property="og:site_name" content="Cơ Điện Lạnh Minh Việt">
-  <meta property="og:locale" content="vi_VN">
-  <meta property="og:url" content="https://minhviethvac.asia/">
-  <meta property="og:title" content="Điều Hoà Giấu Trần &amp; Cấp Khí Tươi Biệt Thự | Minh Việt HVAC">
-  <meta property="og:description" content="Thiết kế bản vẽ 2D miễn phí, thi công điều hòa trung tâm VRV/VRF và cấp khí tươi ERV cho biệt thự, penthouse tại Hà Nội.">
-  <meta property="og:image" content="https://minhviethvac.asia/assets/og-image.jpg">
-  <meta property="og:image:width" content="1200">
-  <meta property="og:image:height" content="630">
-  <meta property="og:image:alt" content="Cơ Điện Lạnh Minh Việt – điều hòa giấu trần và cấp khí tươi cho biệt thự">
-  <meta name="twitter:card" content="summary_large_image">
-
-  <!-- ============================================================
-       GOOGLE ANALYTICS 4
-       THAY G-XXXXXXXXXX BẰNG MÃ ĐO LƯỜNG THẬT (analytics.google.com)
-       Chưa thay thì trang vẫn chạy bình thường, chỉ là không ghi nhận số liệu.
-       ============================================================ -->
-  <script async src="https://www.googletagmanager.com/gtag/js?id=G-XXXXXXXXXX"></script>
-  <script>
-    window.dataLayer = window.dataLayer || [];
-    function gtag(){ dataLayer.push(arguments); }
-    gtag('js', new Date());
-    gtag('config', 'G-XXXXXXXXXX');
-  </script>
-  
-  <!-- Google Fonts: Plus Jakarta Sans -->
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
-  
-  <!-- Main Stylesheet -->
-  <link rel="stylesheet" href="style.css">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Thanh Toán Chuyển Khoản - Minh Việt HVAC</title>
+<meta name="description" content="Quét mã QR chuyển khoản thanh toán cho Minh Việt HVAC - Công ty Cổ Phần Cơ Điện Lạnh Minh Việt.">
+<meta name="robots" content="noindex, follow">
+<link rel="icon" href="/favicon.ico">
+<link rel="stylesheet" href="/style.css">
+<style>
+  .pay-page {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    background: var(--neutral-50);
+  }
+  .pay-header {
+    padding: 18px 20px;
+    text-align: center;
+  }
+  .pay-header img { height: 40px; }
+  .pay-main {
+    flex: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 12px 16px 40px;
+  }
+  .pay-card {
+    background: var(--white);
+    border-radius: var(--radius-xl);
+    padding: 32px 26px;
+    max-width: 420px;
+    width: 100%;
+    text-align: center;
+    box-shadow: var(--shadow-xl);
+  }
+  .pay-title {
+    font-size: 1.4rem;
+    font-weight: 800;
+    color: var(--mv-navy);
+    margin-bottom: 8px;
+  }
+  .pay-desc {
+    font-size: 0.92rem;
+    color: var(--neutral-600);
+    line-height: 1.6;
+    margin-bottom: 22px;
+  }
+  .pay-qr {
+    width: 100%;
+    max-width: 280px;
+    height: auto;
+    border-radius: var(--radius-md);
+    border: 1px solid var(--neutral-200);
+    margin: 0 auto 22px;
+  }
+  .pay-info {
+    text-align: left;
+    background: var(--neutral-50);
+    border-radius: var(--radius-md);
+    padding: 14px 16px;
+    margin-bottom: 22px;
+  }
+  .pay-info-row {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 6px 0;
+    font-size: 0.92rem;
+    color: var(--neutral-600);
+  }
+  .pay-info-row b { margin-left: auto; color: var(--mv-navy); }
+  .pay-copy-btn {
+    border: 1px solid var(--neutral-300);
+    background: var(--white);
+    color: var(--mv-navy);
+    font-size: 0.78rem;
+    font-weight: 700;
+    padding: 3px 9px;
+    border-radius: var(--radius-sm);
+    cursor: pointer;
+  }
+  .pay-copy-btn:hover { background: var(--neutral-100); }
+  .pay-support {
+    font-size: 0.85rem;
+    color: var(--neutral-600);
+  }
+  .pay-support a { color: var(--mv-navy); font-weight: 700; text-decoration: none; }
+  .pay-form { text-align: left; margin-bottom: 22px; }
+  .pay-form label { display: block; margin: 10px 0 5px; font-size: .82rem; font-weight: 700; color: var(--mv-navy); }
+  .pay-form input, .pay-form select { width: 100%; box-sizing: border-box; padding: 10px 12px; border: 1px solid var(--neutral-300); border-radius: var(--radius-sm); font: inherit; background: var(--white); }
+  .pay-form .pay-amount-line { margin: 8px 0 0; font-size: .9rem; color: var(--neutral-600); }
+  .pay-form .pay-amount-line b { color: var(--mv-navy); }
+  .pay-form button { width: 100%; margin-top: 14px; padding: 11px; border: 0; border-radius: var(--radius-sm); background: var(--mv-navy); color: var(--white); font-weight: 700; cursor: pointer; }
+  .pay-form button:disabled { opacity: .6; cursor: wait; }
+  .pay-status { display: none; padding: 12px; margin-bottom: 18px; border-radius: var(--radius-sm); background: #ecfdf5; color: #166534; font-weight: 700; }
+  .pay-status.show { display: block; }
+  .pay-footer {
+    text-align: center;
+    padding: 16px;
+    font-size: 0.78rem;
+    color: var(--neutral-400);
+  }
+</style>
 </head>
 <body>
+  <div class="pay-page">
+    <header class="pay-header">
+      <a href="/">
+        <img src="/assets/logo-minh-viet.webp" alt="Minh Việt HVAC">
+      </a>
+    </header>
 
-  <!-- ================= TOP BAR ================= -->
-  <div class="topbar">
-    <div class="container topbar-content">
-      <div class="topbar-left">
-        <span class="topbar-item">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
-          Hotline kỹ thuật: <a href="tel:0934506191" class="topbar-highlight topbar-link"><strong>0934 506 191</strong></a>
-        </span>
-        <span class="topbar-item">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
-          Email: <a href="mailto:contact@minhvietco.vn" class="topbar-highlight topbar-link">contact@minhvietco.vn</a>
-        </span>
-        <span class="topbar-item">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
-          T2 - T7 (08:00 - 17:00)
-        </span>
+    <main class="pay-main">
+      <div class="pay-card">
+        <h1 class="pay-title">Thanh Toán Chuyển Khoản</h1>
+        <p class="pay-desc">Chọn món hàng/dịch vụ và điền thông tin để tạo đơn. Sau đó quét mã QR bằng app ngân hàng — số tiền và nội dung chuyển khoản (mã đơn hàng) sẽ được điền sẵn để Minh Việt xác nhận tự động.</p>
+
+        <form class="pay-form" id="paymentForm">
+          <label for="payName">Họ tên</label>
+          <input id="payName" name="fullName" required autocomplete="name">
+          <label for="payContact">Số điện thoại / email</label>
+          <input id="payContact" name="contact" required autocomplete="email">
+          <label for="payItem">Món hàng / dịch vụ</label>
+          <select id="payItem" name="productId" required>
+            <option value="">— Đang tải danh sách sản phẩm… —</option>
+          </select>
+          <p class="pay-amount-line" id="payAmountLine"></p>
+          <button type="submit" id="paySubmitBtn" disabled>Tạo đơn và hiển thị mã QR</button>
+        </form>
+        <div class="pay-status" id="payStatus" role="status"></div>
+
+        <img
+          class="pay-qr"
+          id="payQr"
+          src="https://vietqr.app/img?acc=17169927&bank=ACB&amount=2000&addInfo=THANH%20TOAN%20MINH%20VIET&accountName=NGUYEN%20DUC%20THUAN&template=compact&showinfo=true&store=Minh%20Viet%20HVAC"
+          alt="Mã QR thanh toán chuyển khoản Minh Việt HVAC"
+        >
+
+        <div class="pay-info">
+          <div class="pay-info-row">
+            <span>Ngân hàng</span>
+            <b>ACB (Á Châu)</b>
+          </div>
+          <div class="pay-info-row">
+            <span>Số tài khoản</span>
+            <b id="payAccNumber">17169927</b>
+            <button type="button" class="pay-copy-btn" id="payCopyBtn" aria-label="Sao chép số tài khoản">Sao chép</button>
+          </div>
+          <div class="pay-info-row">
+            <span>Chủ tài khoản</span>
+            <b>NGUYEN DUC THUAN</b>
+          </div>
+        </div>
+
+        <p class="pay-support">Cần hỗ trợ? Gọi hotline <a href="tel:0934506191">0934 506 191</a></p>
       </div>
-      <div class="topbar-right">
-        <span class="topbar-item">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
-          Số 17, TT27B, KDT Sudico Nam An Khánh, An Khánh, Hà Nội
-        </span>
-      </div>
-    </div>
+    </main>
+
+    <footer class="pay-footer">© 2026 Công Ty Cổ Phần Cơ Điện Lạnh Minh Việt</footer>
   </div>
 
-  <!-- ================= NAVBAR ================= -->
-  <header class="navbar">
-    <div class="container nav-container">
-      <!-- Minh Việt Logo & Brand Name -->
-      <a href="#" class="brand-wrapper">
-        <div class="brand-logo-img-box">
-          <img src="assets/logo-minh-viet.webp" alt="Cơ Điện Lạnh Minh Việt" class="brand-logo-img">
-        </div>
-        <div class="brand-text-block">
-          <div class="brand-company-title">CƠ ĐIỆN LẠNH <span>MINH VIỆT</span></div>
-          <div class="brand-company-sub">⭐ Điều Hòa & Khí Tươi Cao Cấp</div>
-        </div>
-      </a>
-
-      <!-- Desktop Navigation Menu -->
-      <nav class="nav-center-wrapper">
-        <ul class="nav-menu">
-          <li><a href="#hero" class="nav-link active">Trang Chủ</a></li>
-          <li><a href="#pain-points" class="nav-link">Vấn Đề</a></li>
-          <li class="nav-dropdown">
-            <a href="#gioi-thieu" class="nav-link nav-dropdown-trigger">
-              Về Minh Việt
-              <svg class="nav-caret" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="6 9 12 15 18 9"/></svg>
-            </a>
-            <ul class="nav-dropdown-panel">
-              <li><a href="#gioi-thieu" class="nav-dropdown-link">Giới Thiệu</a></li>
-              <li><a href="#solutions" class="nav-dropdown-link">Giải Pháp</a></li>
-              <li><a href="#process" class="nav-dropdown-link">Quy Trình</a></li>
-              <li><a href="#benefits" class="nav-dropdown-link">Lợi Ích</a></li>
-            </ul>
-          </li>
-          <li><a href="#products" class="nav-link">Sản Phẩm</a></li>
-          <li><a href="#projects" class="nav-link">Dự Án</a></li>
-        </ul>
-      </nav>
-
-      <div class="nav-actions">
-        <a href="#khao-sat-nhu-cau" class="btn btn-secondary btn-sm">Khảo Sát Nhanh</a>
-        <a href="/thanhtoan" class="btn btn-secondary btn-sm">Thanh Toán</a>
-        <a href="#gui-ban-ve" class="btn btn-primary btn-sm">
-          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="17 8 12 3 7 8"/><line x1="12" y1="3" x2="12" y2="15"/></svg>
-          Gửi Bản Vẽ Ngay
-        </a>
-
-        <!-- Hamburger Button for Mobile -->
-        <button class="hamburger-btn" id="mobileMenuOpenBtn" aria-label="Mở menu">
-          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="18" x2="21" y2="18"/></svg>
-        </button>
-      </div>
-    </div>
-  </header>
-
-  <!-- ================= MOBILE DRAWER MENU ================= -->
-  <div class="mobile-drawer-overlay" id="mobileDrawerOverlay"></div>
-  <div class="mobile-drawer" id="mobileDrawer">
-    <div>
-      <div class="drawer-header">
-        <div class="brand-logo-img-box" style="padding: 6px 14px;">
-          <img src="assets/logo-minh-viet.webp" alt="Minh Việt Logo" style="height: 42px;">
-        </div>
-        <button class="drawer-close-btn" id="mobileMenuCloseBtn" aria-label="Đóng menu">✕</button>
-      </div>
-
-      <ul class="drawer-menu">
-        <li><a href="#hero" class="drawer-link active">Trang Chủ</a></li>
-        <li><a href="#pain-points" class="drawer-link">Vấn Đề Không Khí</a></li>
-        <li class="drawer-group-label">Về Minh Việt</li>
-        <li><a href="#gioi-thieu" class="drawer-link drawer-sublink">Giới Thiệu Minh Việt</a></li>
-        <li><a href="#solutions" class="drawer-link drawer-sublink">Giải Pháp & Dịch Vụ</a></li>
-        <li><a href="#process" class="drawer-link drawer-sublink">Quy Trình Thi Công</a></li>
-        <li><a href="#benefits" class="drawer-link drawer-sublink">5 Lợi Ích Vượt Trội</a></li>
-        <li><a href="#products" class="drawer-link">Sản Phẩm Daikin</a></li>
-        <li><a href="#projects" class="drawer-link">Dự Án Tiêu Biểu</a></li>
-      </ul>
-    </div>
-
-    <div class="drawer-footer">
-      <a href="#gui-ban-ve" class="btn btn-orange btn-sm" style="width: 100%; margin-bottom: 10px;">
-        Gửi Bản Vẽ Ngay
-      </a>
-      <a href="/thanhtoan" class="btn btn-secondary btn-sm" style="width: 100%; margin-bottom: 10px;">
-        Thanh Toán Chuyển Khoản
-      </a>
-      <div style="font-size: 0.8rem; color: var(--neutral-400); text-align: center;">
-        Hotline: <a href="tel:0934506191" style="color:#FFF;font-weight:700;text-decoration:none;">0934 506 191</a>
-      </div>
-    </div>
-  </div>
-
-  <!-- ================= HERO SECTION ================= -->
-  <section class="hero" id="hero">
-    <div class="container hero-grid">
-      <div class="hero-content reveal-on-scroll">
-        <div class="hero-badge">
-          <span>CÔNG TY CỔ PHẦN CƠ ĐIỆN LẠNH MINH VIỆT</span>
-        </div>
-        
-        <h1 class="hero-title">
-          Song Hành Cùng Kiến Trúc Sư Từ Bản Vẽ Đầu Tiên Của Ngôi Nhà Bạn — Để <span>Điều Hòa Hài Hòa</span> Với Tổng Thể Công Trình
-        </h1>
-
-        <p class="hero-description">
-          Trước khi báo giá, Minh Việt yêu cầu đủ bản vẽ và song hành cùng kiến trúc sư của bạn ngay từ đầu, để hệ thống điều hòa – thông gió hài hòa với tổng thể công trình thay vì lắp vội rồi phải đập ra sửa lại. Đây cũng là lý do Minh Việt đăng ký cả ngành tư vấn kiến trúc – kỹ thuật, không chỉ lắp đặt điều hòa như phần lớn nhà thầu trên thị trường.
-        </p>
-
-        <div class="hero-cta-group">
-          <a href="#gui-ban-ve" class="btn btn-orange btn-lg">
-            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="17 8 12 3 7 8"/><line x1="12" y1="3" x2="12" y2="15"/></svg>
-            Gửi Bản Vẽ – Nhận Tính Tải 2D Miễn Phí
-          </a>
-          <a href="#calculator" class="btn btn-secondary btn-lg">
-            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="4" y="2" width="16" height="20" rx="2"/><line x1="8" y1="6" x2="16" y2="6"/><line x1="16" y1="14" x2="16" y2="18"/><path d="M8 10h.01M12 10h.01M16 10h.01M8 14h.01M12 14h.01M8 18h.01M12 18h.01"/></svg>
-            Tính Nhanh Công Suất
-          </a>
-        </div>
-
-        <div class="hero-trust-list">
-          <div class="trust-item">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>
-            <span>Thiết kế 2D giấu trần tinh tế</span>
-          </div>
-          <div class="trust-item">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>
-            <span>Lọc sạch 99.9% bụi mịn PM2.5</span>
-          </div>
-          <div class="trust-item">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>
-            <span>100% Thiết bị chính hãng CO/CQ</span>
-          </div>
-        </div>
-      </div>
-
-      <!-- Hero Visual Art & Floating Highlight Badges -->
-      <div class="hero-visual-wrapper reveal-on-scroll">
-        <!-- Floating Badge Top Left -->
-        <div class="floating-badge badge-top-left">
-          <div class="badge-icon">
-            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
-          </div>
-          <div class="badge-text">
-            <strong>500+ Dự Án</strong>
-            <span>Biệt thự & Công trình cao cấp</span>
-          </div>
-        </div>
-
-        <!-- Main Card Image Presentation -->
-        <div class="hero-main-card">
-          <div class="card-img-placeholder">
-            <!-- Simulated Luxury Interior with Hidden Diffusers & Dynamic Airflow Waves -->
-            <svg width="100%" height="100%" viewBox="0 0 600 400" fill="none" xmlns="http://www.w3.org/2000/svg" class="hero-interior-art">
-              <rect width="600" height="400" fill="#0A1E3B"/>
-              <!-- Ceiling -->
-              <path d="M0 0H600V120H0V0Z" fill="#112A52"/>
-              <!-- Linear Slot Diffuser with Glowing Pulse -->
-              <rect x="110" y="75" width="380" height="14" rx="4" fill="#0088CC" class="diffuser-glow-bar"/>
-              <rect x="120" y="79" width="360" height="6" rx="2" fill="#FFFFFF"/>
-              
-              <!-- Dynamic Airflow Glow Lines (Luồng khí tươi mát lành lan tỏa) -->
-              <path d="M150 95 C 150 180, 190 240, 230 320" stroke="url(#airGrad)" stroke-width="4" class="air-stream-line-1"/>
-              <path d="M300 95 C 300 170, 300 240, 300 320" stroke="url(#airGrad)" stroke-width="4.5" class="air-stream-line-2"/>
-              <path d="M450 95 C 450 180, 410 240, 370 320" stroke="url(#airGrad)" stroke-width="4" class="air-stream-line-3"/>
-              
-              <!-- Luxury Living Room Card -->
-              <rect x="70" y="235" width="460" height="130" rx="16" fill="#163275" stroke="#0088CC" stroke-width="2"/>
-              <text x="300" y="285" fill="#FFFFFF" font-family="sans-serif" font-size="18" font-weight="bold" text-anchor="middle">MINH VIỆT HVAC - KHÔNG GIAN ĐẲNG CẤP</text>
-              <text x="300" y="315" fill="#38BDF8" font-family="sans-serif" font-size="13" text-anchor="middle">Cửa gió giấu viền nan dài tinh tế – Giữ trọn 100% vẻ đẹp nội thất</text>
-              <text x="300" y="340" fill="#E0F2FE" font-family="sans-serif" font-size="11" text-anchor="middle">Cấp khí tươi tự nhiên giàu Oxy • Thu hồi nhiệt ERV tiết kiệm 35% điện</text>
-              <defs>
-                <linearGradient id="airGrad" x1="0%" y1="0%" x2="0%" y2="100%">
-                  <stop offset="0%" stop-color="#38BDF8"/>
-                  <stop offset="100%" stop-color="#0088CC" stop-opacity="0.1"/>
-                </linearGradient>
-              </defs>
-            </svg>
-          </div>
-        </div>
-
-        <!-- Floating Badge Bottom Right -->
-        <div class="floating-badge badge-bottom-right">
-          <div class="badge-icon" style="background: linear-gradient(135deg, #10B981 0%, #059669 100%);">
-            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
-          </div>
-          <div class="badge-text">
-            <strong>Bảo Hành Vàng</strong>
-            <span>Kỹ sư có mặt xử lý 2 - 4 Giờ</span>
-          </div>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- ================= BRAND STRIP ================= -->
-  <section class="brand-strip">
-    <div class="container brand-wrapper-logos">
-      <div class="brand-item-badge">DAIKIN</div>
-      <div class="brand-item-badge">PANASONIC</div>
-      <div class="brand-item-badge">MITSUBISHI ELECTRIC</div>
-      <div class="brand-item-badge">TOSHIBA</div>
-      <div class="brand-item-badge">LG AIR CONDITIONING</div>
-      <div class="brand-item-badge">TRANE</div>
-    </div>
-  </section>
-
-  <!-- ================= PAIN POINTS ================= -->
-  <section class="section-padding" id="pain-points">
-    <div class="container">
-      <div class="section-header reveal-on-scroll">
-        <span class="section-tag">Thực Trạng Không Khí Hiện Nay</span>
-        <h2 class="section-title">Có Phải Bạn Đang Gặp Những Rắc Rối Này Với Không Gian Sống Của Mình?</h2>
-        <p class="section-subtitle">Một hệ thống điều hòa thông thường được lắp đặt sai kỹ thuật có thể gây ra hàng loạt vấn đề về sức khỏe, chi phí và thẩm mỹ.</p>
-      </div>
-
-      <div class="grid-cards-4">
-        <div class="pain-card reveal-on-scroll">
-          <div class="pain-icon-box">
-            <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
-          </div>
-          <h3 class="pain-title">Không Khí Bí Bách & Mùi Ẩm Mốc</h3>
-          <p class="pain-desc">Phòng đóng kín bật máy lạnh tích tụ nồng độ CO2 cao, gây thiếu oxy, thức dậy mệt mỏi, đau đầu và là môi trường thuận lợi cho vi khuẩn phát triển.</p>
-        </div>
-
-        <div class="pain-card reveal-on-scroll">
-          <div class="pain-icon-box">
-            <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2v20M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg>
-          </div>
-          <h3 class="pain-title">Hóa Đơn Tiền Điện Tăng Vọt</h3>
-          <p class="pain-desc">Chọn sai công suất hoặc bố trí đường ống luồng gió không tối ưu khiến dàn nén phải gồng tải liên tục 100%, gây tiêu tốn điện năng trầm trọng.</p>
-        </div>
-
-        <div class="pain-card reveal-on-scroll">
-          <div class="pain-icon-box">
-            <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="m9 9 6 6m0-6-6 6"/></svg>
-          </div>
-          <h3 class="pain-title">Phá Vỡ Thẩm Mỹ Kiến Trúc</h3>
-          <p class="pain-desc">Dàn lạnh cục bộ treo tường thô kệch làm giảm giá trị không gian sang trọng; dàn nóng treo chằng chịt chiếm dụng toàn bộ ban công.</p>
-        </div>
-
-        <div class="pain-card reveal-on-scroll">
-          <div class="pain-icon-box">
-            <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z"/></svg>
-          </div>
-          <h3 class="pain-title">Thợ Làm Ẩu, Hỏng Hóc Liên Miên</h3>
-          <p class="pain-desc">Ống bảo ôn mỏng đọng sương làm ố vàng trần thạch cao, rò rỉ gas, tiếng ồn lớn và đơn vị thi công bàn giao xong không chịu bảo hành.</p>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- ================= GIỚI THIỆU / ABOUT ================= -->
-  <section class="section-padding about-section" id="gioi-thieu">
-    <div class="container">
-      <div class="section-header reveal-on-scroll">
-        <span class="section-tag">Giới Thiệu Minh Việt</span>
-        <h2 class="section-title about-title-oneline">Hành trình khẳng định vị thế nhà thầu HVAC</h2>
-      </div>
-
-      <div class="about-grid">
-        <div class="about-text reveal-on-scroll">
-          <p>Thay mặt toàn thể cán bộ, kỹ sư và công nhân viên Minh Việt, chúng tôi xin gửi tới Quý khách hàng lời chào trân trọng và lời cảm ơn sâu sắc vì sự tin tưởng, quan tâm và những hợp tác mà Quý khách hàng, đối tác đã dành cho công ty.</p>
-          <p>Trải qua những bước đầu của quá trình khởi nghiệp, hoạt động trong lĩnh vực điều hòa không khí và thông gió tại thị trường miền Bắc, thị phần và uy tín của Minh Việt đã được khẳng định, được biết đến rộng rãi bởi khách hàng và đối tác kinh doanh điều hòa không khí trong khu vực.</p>
-          <p>Nhận thấy tiềm năng và sự phát triển mạnh mẽ của các dự án xây mới trụ sở làm việc, tòa nhà văn phòng, hệ thống showroom, trung tâm thương mại, nhà máy công nghiệp và các khu đô thị mới, cùng nhu cầu cấp thiết về một giải pháp cơ điện đồng bộ, hiện đại để đảm bảo chất lượng cao nhất cho công trình, Minh Việt đã tham gia nhiều gói thầu cung cấp và lắp đặt hệ thống cơ điện tiêu biểu, cùng nhiều tòa nhà văn phòng, khách sạn khác tại Hà Nội và các tỉnh phía Bắc.</p>
-          <p>Với đội ngũ quản lý năng động, sáng tạo, những kỹ sư trẻ nhiệt huyết và lực lượng công nhân lành nghề cùng máy móc, trang thiết bị hiện đại, Minh Việt luôn phấn đấu vì sự hài lòng và thành công của khách hàng, đối tác, hướng tới mục tiêu trở thành một nhà thầu cơ điện hàng đầu trong nước, tự tin sánh ngang các nhà thầu khu vực và quốc tế.</p>
-        </div>
-
-        <div class="about-highlight-card reveal-on-scroll">
-          <div class="about-highlight-title">Một Số Gói Thầu Tiêu Biểu</div>
-          <ul class="about-highlight-list">
-            <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg> Showroom Ô Tô Lexus – Công ty Cổ phần Lexus Thăng Long</li>
-            <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg> Showroom Ô Tô Hyundai Thành Công – Tập đoàn Thành Công</li>
-            <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg> Nhà Máy Thời Trang Dự Phát – thương hiệu IVY moda</li>
-          </ul>
-          <blockquote class="about-quote">
-            Minh Việt cam kết luôn nỗ lực ở mức cao nhất để trở thành đối tác tin cậy của Quý khách hàng trong từng dự án mà chúng tôi có hân hạnh được tham gia.
-          </blockquote>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- ================= SOLUTIONS & SERVICES ================= -->
-  <section class="section-padding solutions-section" id="solutions">
-    <div class="container">
-      <div class="section-header reveal-on-scroll">
-        <span class="section-tag" style="color: var(--mv-sky);">Giải Pháp Kỹ Thuật Đỉnh Cao Minh Việt</span>
-        <h2 class="section-title">Hệ Thống Vi Khí Hậu Chuẩn Xác Cho Từng Công Trình</h2>
-        <p class="section-subtitle">Chúng tôi cung cấp giải pháp toàn diện từ khảo sát, tính toán tải nhiệt đến thiết kế và thi công chuẩn quốc tế.</p>
-      </div>
-
-      <div class="solutions-grid">
-        <!-- Service 1 -->
-        <div class="solution-card reveal-on-scroll">
-          <div>
-            <div class="sol-icon">
-              <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="6" width="20" height="12" rx="2"/><path d="M6 12h.01M10 12h.01M14 12h.01M18 12h.01"/></svg>
-            </div>
-            <span class="sol-target">Biệt Thự & Penthouse</span>
-            <h3 class="sol-title">Điều Hòa Trung Tâm VRV / VRF</h3>
-            <p class="sol-desc">Giải pháp đẳng cấp nhất: 1 dàn nóng duy nhất kết nối nhiều dàn lạnh giấu trần, điều khiển thông minh từng phòng riêng biệt.</p>
-            <ul class="sol-features">
-              <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg> Tiết kiệm tối đa vị trí đặt dàn nóng</li>
-              <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg> Cửa gió Linear nan dài hòa hợp trần</li>
-              <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg> Tuổi thọ bền bỉ từ 15 đến 20 năm</li>
-            </ul>
-          </div>
-          <a href="#gui-ban-ve" class="btn btn-outline-mv" style="border-color: var(--mv-sky); color: var(--mv-sky); width: 100%;">Nhận Báo Giá VRV/VRF</a>
-        </div>
-
-        <!-- Service 2 -->
-        <div class="solution-card reveal-on-scroll" style="border-color: var(--mv-blue); background: rgba(0, 136, 204, 0.1);">
-          <div>
-            <div class="sol-icon" style="background: rgba(0, 136, 204, 0.3);">
-              <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2v20M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg>
-            </div>
-            <span class="sol-target" style="background: var(--mv-blue); color: var(--white);">Sức Khỏe Vàng</span>
-            <h3 class="sol-title">Cấp Khí Tươi & Lọc Bụi ERV</h3>
-            <p class="sol-desc">Thu hồi nhiệt, lọc sạch 99.9% bụi mịn PM2.5, phấn hoa và cấp oxy tươi tự nhiên liên tục 24/7 vào không gian phòng kín.</p>
-            <ul class="sol-features">
-              <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg> Không còn thiếu oxy, ngủ dậy tỉnh táo</li>
-              <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg> Bộ lọc HEPA & than hoạt tính khử mùi</li>
-              <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg> Thu hồi đến 80% nhiệt độ, không tốn điện</li>
-            </ul>
-          </div>
-          <a href="#gui-ban-ve" class="btn btn-primary" style="width: 100%;">Tư Vấn Khí Tươi ERV</a>
-        </div>
-
-        <!-- Service 3 -->
-        <div class="solution-card reveal-on-scroll">
-          <div>
-            <div class="sol-icon">
-              <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
-            </div>
-            <span class="sol-target">Căn Hộ & Nhà Phố</span>
-            <h3 class="sol-title">Điều Hòa Multi & Giấu Trần Nối Ống Gió</h3>
-            <p class="sol-desc">Giải pháp tối ưu chi phí cho nhà phố và căn hộ 2-4 phòng ngủ. Giữ trọn vẻ đẹp thẩm mỹ giấu trần với mức đầu tư hợp lý.</p>
-            <ul class="sol-features">
-              <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg> 1 dàn nóng gọn nhẹ giải phóng ban công</li>
-              <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg> Kiểm soát nhiệt độ độc lập từng phòng</li>
-              <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg> Chi phí tối ưu, thi công nhanh gọn</li>
-            </ul>
-          </div>
-          <a href="#gui-ban-ve" class="btn btn-outline-mv" style="border-color: var(--mv-sky); color: var(--mv-sky); width: 100%;">Báo Giá Gói Multi</a>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- ================= PRODUCT CATALOG: CỤC BỘ + VRV/VRF ================= -->
-  <section class="section-padding products-section" id="products">
-    <div class="container">
-      <div class="section-header reveal-on-scroll">
-        <span class="section-tag">Danh Mục Thiết Bị Chính Hãng</span>
-        <h2 class="section-title">Sản Phẩm Điều Hòa Không Khí Daikin</h2>
-        <p class="section-subtitle">Hai dòng giải pháp chính hãng: điều hòa cục bộ cho từng phòng và điều hòa trung tâm VRV/VRF cho toàn công trình.</p>
-      </div>
-
-      <div class="product-segment-tabs reveal-on-scroll" role="group" aria-label="Chọn dòng sản phẩm">
-        <button type="button" class="product-segment-btn active" data-product-segment="local">Điều Hòa Cục Bộ</button>
-        <button type="button" class="product-segment-btn" data-product-segment="vrv">Điều Hòa Trung Tâm (VRV/VRF)</button>
-      </div>
-
-      <!-- Điều Hòa Cục Bộ -->
-      <div class="product-segment-panel" id="localAcPanel">
-        <div class="product-filter-tabs reveal-on-scroll" role="group" aria-label="Lọc sản phẩm Daikin">
-          <button type="button" class="product-filter-btn active" data-product-filter="all">Tất Cả</button>
-          <button type="button" class="product-filter-btn" data-product-filter="wall">Treo Tường</button>
-          <button type="button" class="product-filter-btn" data-product-filter="inverter">Inverter</button>
-          <button type="button" class="product-filter-btn" data-product-filter="two-way">Hai Chiều</button>
-          <button type="button" class="product-filter-btn" data-product-filter="cassette">Cassette</button>
-          <button type="button" class="product-filter-btn" data-product-filter="duct">Nối Ống Gió</button>
-        </div>
-
-        <div class="product-grid" id="productGrid" aria-live="polite"></div>
-
-        <div class="product-catalog-footer reveal-on-scroll">
-          <button type="button" class="btn btn-outline-mv" id="showAllProductsBtn">Xem Toàn Bộ Sản Phẩm</button>
-          <p class="product-price-note">Giá trên website là giá tham khảo và có thể thay đổi theo chính sách hãng, thời điểm đặt hàng và phạm vi vật tư lắp đặt.</p>
-        </div>
-      </div>
-
-      <!-- Điều Hòa Trung Tâm VRV/VRF -->
-      <div class="product-segment-panel" id="vrvPanel" hidden>
-        <div class="product-filter-tabs reveal-on-scroll" role="group" aria-label="Lọc sản phẩm VRV/VRF">
-          <button type="button" class="product-filter-btn active" data-vrv-filter="all">Tất Cả</button>
-          <button type="button" class="product-filter-btn" data-vrv-filter="outdoor">Dàn Nóng</button>
-          <button type="button" class="product-filter-btn" data-vrv-filter="indoor">Dàn Lạnh</button>
-          <button type="button" class="product-filter-btn" data-vrv-filter="ventilation">Thông Gió ERV</button>
-          <button type="button" class="product-filter-btn" data-vrv-filter="control">Điều Khiển</button>
-        </div>
-
-        <div class="product-grid" id="vrvProductGrid" aria-live="polite"></div>
-
-        <div class="product-catalog-footer reveal-on-scroll">
-          <p class="product-price-note">Hệ thống VRV/VRF được thiết kế và báo giá riêng theo diện tích, số phòng và tải nhiệt thực tế của từng công trình. Vui lòng gửi bản vẽ hoặc gọi hotline để nhận báo giá chính xác.</p>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- ================= INTERACTIVE HVAC CAPACITY CALCULATOR ================= -->
-  <section class="section-padding calculator-section" id="calculator">
-    <div class="container">
-      <div class="section-header reveal-on-scroll">
-        <span class="section-tag">Công Cụ Tương Tác</span>
-        <h2 class="section-title">Tính Nhanh Công Suất & Ước Tính Thiết Bị</h2>
-        <p class="section-subtitle">Chỉ mất 10 giây để gia chủ có ngay ước tính nhanh công suất lạnh BTU/HP và ngân sách đầu tư dự kiến.</p>
-      </div>
-
-      <div class="calc-box reveal-on-scroll">
-        <!-- Inputs -->
-        <div class="calc-inputs-col">
-          <h3>Nhập Thông Số Công Trình</h3>
-          
-          <div class="calc-field-group">
-            <label class="calc-label">Loại Không Gian:</label>
-            <select class="calc-select" id="calcRoomType">
-              <option value="living">Phòng Khách Biệt Thự / Penthouse (Tải nhiệt cao)</option>
-              <option value="bedroom" selected>Phòng Ngủ Master / Phòng làm việc</option>
-              <option value="dining">Phòng Bếp & Ăn liên thông</option>
-              <option value="office">Văn Phòng Làm Việc / Phòng Họp</option>
-            </select>
-          </div>
-
-          <div class="calc-field-group">
-            <label class="calc-label">Diện Tích Phòng: <span id="areaDisplay" style="color: var(--mv-blue); font-weight:800;">30 m²</span></label>
-            <input type="range" class="calc-input" id="calcAreaRange" min="10" max="150" value="30" step="5">
-          </div>
-
-          <div class="calc-field-group">
-            <label class="calc-label">Chiều Cao Trần (m):</label>
-            <select class="calc-select" id="calcCeilingHeight">
-              <option value="2.8">Dưới 3.0 m (Trần căn hộ/nhà phố)</option>
-              <option value="3.5" selected>3.0 m - 3.8 m (Biệt thự tiêu chuẩn)</option>
-              <option value="4.5">Trên 4.0 m (Thông tầng / Penthouse)</option>
-            </select>
-          </div>
-
-          <div class="calc-field-group">
-            <label class="calc-label">Mức Độ Đón Nắng / Kính Hướng Tây:</label>
-            <select class="calc-select" id="calcSunExposure">
-              <option value="normal" selected>Bình thường / Ít nắng chiếu trực tiếp</option>
-              <option value="high">Nắng gắt / Vách kính lớn hướng Tây (+15% tải)</option>
-            </select>
-          </div>
-        </div>
-
-        <!-- Calculated Result Output Card -->
-        <div class="calc-results-card">
-          <div>
-            <div class="calc-result-header">
-              <h4>Kết Quả Tính Tải Chuẩn Minh Việt</h4>
-              <p>Dựa trên tiêu chuẩn HVAC quốc tế (ASHRAE & TCVN)</p>
-            </div>
-
-            <div class="calc-metrics-grid">
-              <div class="calc-metric-item">
-                <div class="calc-metric-val" id="calcBtuResult">24.000</div>
-                <div class="calc-metric-lbl">Công suất BTU/h</div>
-              </div>
-              <div class="calc-metric-item">
-                <div class="calc-metric-val" id="calcHpResult">2.7 HP</div>
-                <div class="calc-metric-lbl">Mã Lực HP</div>
-              </div>
-              <div class="calc-metric-item">
-                <div class="calc-metric-val" id="calcCostEstResult" style="font-size:1.35rem;">32 - 41 Tr</div>
-                <div class="calc-metric-lbl">Ước Tính Ngân Sách</div>
-              </div>
-            </div>
-
-            <div class="calc-recommendation">
-              <div class="calc-rec-title">Phương án cấu hình khuyên dùng:</div>
-              <div class="calc-rec-text" id="calcRecText">
-                Dàn lạnh giấu trần nối ống gió Inverter Daikin/Panasonic <strong>24.000 BTU</strong> + Cửa gió Linear 1.2m kết hợp cấp khí tươi lọc PM2.5.
-              </div>
-            </div>
-          </div>
-
-          <button type="button" class="btn btn-orange" id="applyCalcToFormBtn" style="width: 100%;">
-            Áp Dụng Cấu Hình Này Vào Form Báo Giá
-          </button>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- ================= PROJECT SHOWCASE GALLERY ================= -->
-  <section class="section-padding projects-section" id="projects">
-    <div class="container">
-      <div class="section-header reveal-on-scroll">
-        <span class="section-tag">Hồ Sơ Năng Lực Thực Tế</span>
-        <h2 class="section-title">Công Trình Tiêu Biểu Minh Việt Đã Thực Hiện</h2>
-        <p class="section-subtitle">Những công trình điều hòa không khí và thông gió Minh Việt đã trực tiếp cung cấp, lắp đặt và bàn giao.</p>
-      </div>
-
-      <!-- Filter Tabs -->
-      <div class="project-filter-tabs reveal-on-scroll">
-        <button class="filter-tab-btn active" data-filter="all">Tất Cả Dự Án</button>
-        <button class="filter-tab-btn" data-filter="hotel">Khách Sạn</button>
-        <button class="filter-tab-btn" data-filter="factory">Nhà Xưởng</button>
-        <button class="filter-tab-btn" data-filter="showroom">Showroom</button>
-        <button class="filter-tab-btn" data-filter="office">Văn Phòng</button>
-        <button class="filter-tab-btn" data-filter="villa">Biệt Thự</button>
-      </div>
-
-      <div class="projects-grid">
-        <div class="project-card reveal-on-scroll" data-category="hotel">
-          <div class="project-img-wrapper">
-            <span class="project-tag-badge">Khách Sạn</span>
-            <img src="assets/projects/reiwa-inn.webp" alt="Khách sạn Reiwa Inn Apartment tại Kim Mã Thượng, Hà Nội" loading="lazy" decoding="async">
-          </div>
-          <div class="project-body">
-            <h3 class="project-name">Khách Sạn Reiwa Inn Apartment</h3>
-            <ul class="project-spec-list">
-              <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg> Địa điểm: 53 Kim Mã Thượng, Ba Đình, Hà Nội</li>
-              <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg> Gói thầu: Cung cấp thiết bị điều hòa không khí</li>
-              <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg> Thiết bị: Điều hòa treo tường Mitsubishi</li>
-            </ul>
-            <a href="#gui-ban-ve" class="btn btn-outline-mv btn-sm" style="width: 100%;">Tư Vấn Giải Pháp Tương Tự</a>
-          </div>
-        </div>
-
-        <div class="project-card reveal-on-scroll" data-category="hotel">
-          <div class="project-img-wrapper">
-            <span class="project-tag-badge">Khách Sạn</span>
-            <img src="assets/projects/grand-dragon.webp" alt="Hệ thống thông gió khách sạn Grand Dragon" loading="lazy" decoding="async">
-          </div>
-          <div class="project-body">
-            <h3 class="project-name">Khách Sạn Grand Dragon</h3>
-            <ul class="project-spec-list">
-              <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg> Địa điểm: 21 Lê Văn Lương, Thanh Xuân, Hà Nội</li>
-              <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg> Hạng mục: Quạt tăng áp và hệ thống hút khói</li>
-              <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg> Thiết bị: Quạt thông gió System Fan</li>
-            </ul>
-            <a href="#gui-ban-ve" class="btn btn-outline-mv btn-sm" style="width: 100%;">Tư Vấn Giải Pháp Tương Tự</a>
-          </div>
-        </div>
-
-        <div class="project-card reveal-on-scroll" data-category="factory">
-          <div class="project-img-wrapper">
-            <span class="project-tag-badge">Nhà Xưởng</span>
-            <img src="assets/projects/du-phat.webp" alt="Nhà máy sản xuất thời trang Dự Phát tại Hưng Yên" loading="lazy" decoding="async">
-          </div>
-          <div class="project-body">
-            <h3 class="project-name">Nhà Máy Thời Trang Dự Phát</h3>
-            <ul class="project-spec-list">
-              <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg> Quy mô: 8.000 m², 2 tầng làm việc và khu xưởng</li>
-              <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg> Hạng mục: Điều hòa không khí và thông gió</li>
-              <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg> Thiết bị: Daikin VRV-IV và điều hòa Package</li>
-            </ul>
-            <a href="#gui-ban-ve" class="btn btn-outline-mv btn-sm" style="width: 100%;">Tư Vấn Giải Pháp Tương Tự</a>
-          </div>
-        </div>
-
-        <div class="project-card reveal-on-scroll" data-category="showroom">
-          <div class="project-img-wrapper">
-            <span class="project-tag-badge">Showroom</span>
-            <img src="assets/projects/hyundai-thanh-cong.webp" alt="Trung tâm phân phối ô tô Hyundai Thành Công" loading="lazy" decoding="async">
-          </div>
-          <div class="project-body">
-            <h3 class="project-name">Trung Tâm Ô Tô Hyundai Thành Công</h3>
-            <ul class="project-spec-list">
-              <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg> Quy mô: 6.000 m², 2 tầng và khu showroom</li>
-              <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg> Hạng mục: Điều hòa trung tâm và thông gió</li>
-              <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg> Thiết bị: Daikin VRV-IV và quạt Kruger</li>
-            </ul>
-            <a href="#gui-ban-ve" class="btn btn-outline-mv btn-sm" style="width: 100%;">Tư Vấn Giải Pháp Tương Tự</a>
-          </div>
-        </div>
-
-        <div class="project-card reveal-on-scroll" data-category="office">
-          <div class="project-img-wrapper">
-            <span class="project-tag-badge">Văn Phòng</span>
-            <img src="assets/projects/gamuda-land.webp" alt="Văn phòng Gamuda Land Việt Nam tại Yên Sở, Hà Nội" loading="lazy" decoding="async">
-          </div>
-          <div class="project-body">
-            <h3 class="project-name">Văn Phòng Gamuda Land Việt Nam</h3>
-            <ul class="project-spec-list">
-              <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg> Địa điểm: Yên Sở, Hoàng Mai, Hà Nội</li>
-              <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg> Quy mô: 4 tầng, diện tích 900 m² mỗi tầng</li>
-              <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg> Thiết bị: Điều hòa trung tâm LG Multi V5</li>
-            </ul>
-            <a href="#gui-ban-ve" class="btn btn-outline-mv btn-sm" style="width: 100%;">Tư Vấn Giải Pháp Tương Tự</a>
-          </div>
-        </div>
-
-        <div class="project-card reveal-on-scroll" data-category="villa">
-          <div class="project-img-wrapper">
-            <span class="project-tag-badge">Biệt Thự</span>
-            <img src="assets/projects/vinhomes-riverside.webp" alt="Biệt thự cao cấp Vinhomes Riverside Long Biên" loading="lazy" decoding="async">
-          </div>
-          <div class="project-body">
-            <h3 class="project-name">Biệt Thự Vinhomes Riverside</h3>
-            <ul class="project-spec-list">
-              <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg> Địa điểm: Hoa Sữa 5.26, Long Biên, Hà Nội</li>
-              <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg> Hệ thống: Điều hòa trung tâm Daikin VRV-H</li>
-              <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg> Thông gió: Hệ thống quạt Panasonic</li>
-            </ul>
-            <a href="#gui-ban-ve" class="btn btn-outline-mv btn-sm" style="width: 100%;">Tư Vấn Giải Pháp Tương Tự</a>
-          </div>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- ================= BLUEPRINT UPLOAD & FAST QUOTE SECTION ================= -->
-  <section class="section-padding blueprint-section" id="gui-ban-ve">
-    <div class="container">
-      <div class="blueprint-container-box reveal-on-scroll">
-        
-        <!-- Left Banner Info -->
-        <div class="blueprint-left-info">
-          <div>
-            <div class="promo-badge">DỊCH VỤ THIẾT KẾ ĐỘC QUYỀN TỪ MINH VIỆT</div>
-            <h3>Gửi Bản Vẽ Ngay – Nhận Bản Vẽ Tính Tải 2D & Báo Giá Sau 2 Giờ</h3>
-            <p>Bạn đã có bản vẽ mặt bằng kiến trúc hoặc hồ sơ thiết kế nội thất? Hãy gửi cho chúng tôi để các kỹ sư HVAC Minh Việt lên phương án bố trí hoàn toàn <strong>MIỄN PHÍ</strong>.</p>
-            
-            <div class="reward-card">
-              <div class="reward-title">
-                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 12v10H4V12"/><path d="M2 7h20v5H2z"/><path d="M12 22V7"/><path d="M12 7H7.5a2.5 2.5 0 0 1 0-5C11 2 12 7 12 7z"/><path d="M12 7h4.5a2.5 2.5 0 0 0 0-5C13 2 12 7 12 7z"/></svg>
-                Quà Tặng Khi Đăng Ký Hôm Nay:
-              </div>
-              <ul class="reward-items">
-                <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg> Miễn phí 100% Gói thiết kế bản vẽ 2D bố trí cửa gió (Trị giá 5.000.000đ)</li>
-                <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg> Tặng 01 năm bảo dưỡng hệ thống định kỳ miễn phí tận nhà</li>
-              </ul>
-            </div>
-          </div>
-
-          <div class="guarantee-note">
-            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>
-            Cam kết bảo mật 100% hồ sơ thiết kế và thông tin khách hàng.
-          </div>
-        </div>
-
-        <!-- Right Interactive Form -->
-        <div class="blueprint-right-form">
-          <div class="form-header">
-            <h4>Đăng Ký Khảo Sát & Nhận Phương Án 2D</h4>
-            <p>Vui lòng điền thông tin bên dưới, kỹ sư trưởng Minh Việt sẽ liên hệ tư vấn chuyên sâu.</p>
-          </div>
-
-              <form id="quoteForm" novalidate>
-                <input type="text" id="formWebsite" name="website" tabindex="-1" autocomplete="off" aria-hidden="true" style="position:absolute;left:-9999px;opacity:0;pointer-events:none;">
-            <div class="form-grid">
-              <div class="form-group">
-                <label class="form-label">Họ và tên của bạn <span class="req">*</span></label>
-                <input type="text" id="formFullName" name="fullName" class="form-input" placeholder="Ví dụ: Nguyễn Văn A" autocomplete="name" required>
-              </div>
-
-              <div class="form-group">
-                <label class="form-label">Số điện thoại <span class="req">*</span></label>
-                <input type="tel" id="formPhone" name="phone" class="form-input" placeholder="Ví dụ: 0988 123 456" autocomplete="tel" inputmode="tel" required>
-              </div>
-
-              <div class="form-group">
-                <label class="form-label">Loại công trình</label>
-                <select class="form-select" id="formProjectType" name="projectType">
-                  <option value="biet-thu">Biệt thự / Villa</option>
-                  <option value="penthouse">Penthouse / Căn hộ cao cấp</option>
-                  <option value="nha-pho">Nhà phố / Liền kề</option>
-                  <option value="van-phong">Văn phòng / Khách sạn</option>
-                  <option value="nha-hang">Nhà hàng / Quán Cafe</option>
-                  <option value="nha-xuong">Nhà xưởng / Khác</option>
-                </select>
-              </div>
-
-              <div class="form-group">
-                <label class="form-label">Diện tích ước tính (m²)</label>
-                <input type="text" id="formArea" name="area" class="form-input" placeholder="Ví dụ: 250m²">
-              </div>
-
-              <!-- Drag and Drop Upload Box -->
-              <div class="form-group full-width">
-                <label class="form-label">Đính kèm bản vẽ mặt bằng / Ảnh hiện trạng</label>
-                <div class="file-upload-dropzone" id="blueprintDropzone">
-                  <input type="file" id="blueprintFileInput" accept=".pdf,.dwg,.jpg,.jpeg,.png,.zip,.rar">
-                  
-                  <div class="upload-content-default">
-                    <svg class="upload-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="17 8 12 3 7 8"/><line x1="12" y1="3" x2="12" y2="15"/></svg>
-                    <div class="upload-text-main">Kéo thả bản vẽ vào đây hoặc Nhấn để chọn tệp</div>
-                    <div class="upload-text-sub">Hỗ trợ PDF, CAD (.dwg), JPG/PNG, ZIP (tối đa 4MB). File lớn hơn vui lòng gọi hotline để được hỗ trợ.</div>
-                  </div>
-
-                  <div class="file-preview-pill" id="filePreview">
-                    <span id="fileNameDisplay">📄 file_name.pdf (2.4 MB)</span>
-                    <button type="button" id="removeFileBtn" style="background:transparent; border:none; color:#EF4444; font-weight:bold; cursor:pointer;">✕ Xóa</button>
-                  </div>
-                </div>
-                <div class="fallback-tip">
-                  <em>Chưa có file sẵn? Bạn chỉ cần điền số điện thoại, kỹ sư sẽ gọi lại để hướng dẫn gửi bản vẽ.</em>
-                </div>
-              </div>
-
-              <div class="form-group full-width">
-                <label class="form-label">Ghi chú hoặc Yêu cầu đặc biệt</label>
-                <textarea class="form-textarea" id="formNotes" name="notes" rows="2" placeholder="Ví dụ: Ưu tiên thiết bị Daikin, cần thêm hệ thống cấp khí tươi cho 3 phòng ngủ..."></textarea>
-              </div>
-            </div>
-
-            <div class="form-group full-width">
-              <label class="mv-consent">
-                <input type="checkbox" id="formConsent" name="consent" required>
-                <span>Tôi đồng ý để Cơ Điện Lạnh Minh Việt lưu trữ và sử dụng thông tin cùng bản vẽ tôi gửi nhằm mục đích tư vấn, tính tải và báo giá, theo <a href="/chinh-sach-bao-mat.html" target="_blank" rel="noopener">Chính sách bảo vệ dữ liệu cá nhân</a>.</span>
-              </label>
-            </div>
-
-            <button type="submit" class="btn btn-orange btn-lg" style="width: 100%;">
-              Gửi Bản Vẽ & Nhận Phương Án 2D Tối Ưu
-            </button>
-            <p id="quoteFormError" role="alert" aria-live="polite" style="display:none;margin-top:12px;color:#B91C1C;font-weight:600;text-align:center;"></p>
-          </form>
-        </div>
-
-      </div>
-    </div>
-  </section>
-
-  <!-- ================= KHẢO SÁT NHU CẦU NHANH (GOOGLE FORM) ================= -->
-  <section class="section-padding khao-sat-section" id="khao-sat-nhu-cau">
-    <div class="container">
-      <div class="section-header reveal-on-scroll">
-        <span class="section-tag">Khảo Sát Nhanh 5 Câu Hỏi</span>
-        <h2 class="section-title">Cho Chúng Tôi Biết Nhu Cầu Của Anh/Chị Trong 30 Giây</h2>
-        <p class="section-subtitle">Điền nhanh khảo sát bên dưới, đội ngũ kỹ thuật Minh Việt sẽ liên hệ tư vấn phương án và báo giá phù hợp nhất với công trình của bạn.</p>
-      </div>
-
-      <div class="google-form-embed-box reveal-on-scroll">
-        <!-- Chiều cao iframe khớp với chiều cao Google Form (1631px). Nếu sau này bạn
-             sửa/thêm câu hỏi trong Form, cập nhật lại giá trị height trong .google-form-iframe
-             (style.css) cho khớp để tránh bị cắt hoặc dư khoảng trắng. -->
-        <iframe
-          src="https://docs.google.com/forms/d/e/1FAIpQLSeVih9TdMIQYtTp-duV16OdZWodCu1QmBW4T-I_3bPVbiaW9w/viewform?embedded=true"
-          title="Khảo sát nhu cầu điều hòa & khí tươi Minh Việt"
-          loading="lazy"
-          class="google-form-iframe">
-          Đang tải khảo sát…
-        </iframe>
-      </div>
-
-      <p class="google-form-fallback-note reveal-on-scroll">
-        Không thấy khảo sát hiện lên?
-        <a href="https://docs.google.com/forms/d/e/1FAIpQLSeVih9TdMIQYtTp-duV16OdZWodCu1QmBW4T-I_3bPVbiaW9w/viewform" target="_blank" rel="noopener">Mở khảo sát trong tab mới</a>.
-      </p>
-    </div>
-  </section>
-
-  <!-- ================= BENEFITS SECTION ================= -->
-  <section class="section-padding" id="benefits" style="background: #FFFFFF;">
-    <div class="container">
-      <div class="section-header reveal-on-scroll">
-        <span class="section-tag">Giá Trị Khác Biệt</span>
-        <h2 class="section-title">5 Lợi Ích Vượt Trội Khi Chọn Cơ Điện Lạnh Minh Việt</h2>
-        <p class="section-subtitle section-subtitle-oneline">Đầu tư vào một hệ sinh thái không khí chuẩn xác mang lại sức khỏe và giá trị bền vững theo thời gian.</p>
-      </div>
-
-      <div class="benefits-grid">
-        <div class="benefit-card reveal-on-scroll">
-          <div class="benefit-label">Tiết Kiệm Điện</div>
-          <p class="benefit-desc">Tính toán chuẩn tải nhiệt và công nghệ biến tần Inverter giúp hệ thống luôn hoạt động ở dải tải tối ưu nhất.</p>
-        </div>
-
-        <div class="benefit-card reveal-on-scroll">
-          <div class="benefit-label">Lọc Bụi Mịn PM2.5</div>
-          <p class="benefit-desc">Không khí trong lành, sạch vi khuẩn và giàu oxy tự nhiên giúp bảo vệ hệ hô hấp và nâng cao chất lượng giấc ngủ.</p>
-        </div>
-
-        <div class="benefit-card reveal-on-scroll">
-          <div class="benefit-label">Vận Hành Êm Ái</div>
-          <p class="benefit-desc">Hệ thống ống gió bọc tiêu âm chống rung cao cấp, trả lại không gian tĩnh lặng cho phòng ngủ và phòng làm việc.</p>
-        </div>
-
-        <div class="benefit-card reveal-on-scroll">
-          <div class="benefit-label">Độ Bền Vượt Trội</div>
-          <p class="benefit-desc">Sử dụng đồng dày chuẩn quốc tế, bảo ôn cách nhiệt chống cháy và quy trình thử áp suất nitơ nghiêm ngặt.</p>
-        </div>
-
-        <div class="benefit-card reveal-on-scroll">
-          <div class="benefit-stat">2 - 4h</div>
-          <div class="benefit-label">Hỗ Trợ Kỹ Thuật</div>
-          <p class="benefit-desc">Đội ngũ kỹ thuật viên thường trực cam kết có mặt kiểm tra xử lý sự cố trong vòng 2 - 4 giờ tại nội thành.</p>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- ================= PROCESS SECTION ================= -->
-  <section class="section-padding process-section" id="process">
-    <div class="container">
-      <div class="section-header reveal-on-scroll">
-        <span class="section-tag">Chuẩn Hóa Kỹ Thuật</span>
-        <h2 class="section-title">Quy Trình Triển Khai 5 Bước Chuyên Nghiệp</h2>
-        <p class="section-subtitle">Đảm bảo đúng tiến độ xây dựng, chuẩn kỹ thuật và tuyệt đối không phát sinh chi phí.</p>
-      </div>
-
-      <div class="process-grid">
-        <div class="process-card reveal-on-scroll">
-          <div class="process-step-num">1</div>
-          <h3 class="process-step-title">Khảo Sát Thực Địa</h3>
-          <p class="process-step-desc">Đo đạc kích thước thực tế, kiểm tra dầm trần, vị trí thoát nước và hướng đặt dàn nóng tối ưu nhất.</p>
-        </div>
-
-        <div class="process-card reveal-on-scroll">
-          <div class="process-step-num">2</div>
-          <h3 class="process-step-title">Thiết Kế Bản Vẽ 2D</h3>
-          <p class="process-step-desc">Tính toán công suất nhiệt (BTU/kW), bố trí đường ống gió, cửa gió thẩm mỹ và lập dự toán chi tiết.</p>
-        </div>
-
-        <div class="process-card reveal-on-scroll">
-          <div class="process-step-num">3</div>
-          <h3 class="process-step-title">Thi Công Ống & Dây</h3>
-          <p class="process-step-desc">Đi ống đồng dày, bọc bảo ôn đôi chống đọng sương, nén áp suất Nitơ kiểm tra rò rỉ trước khi đóng trần.</p>
-        </div>
-
-        <div class="process-card reveal-on-scroll">
-          <div class="process-step-num">4</div>
-          <h3 class="process-step-title">Lắp Máy & Đo Kiểm</h3>
-          <p class="process-step-desc">Lắp đặt mặt nạ cửa gió giấu trần, hút chân không sâu, đo lưu lượng gió và kiểm tra độ êm từng phòng.</p>
-        </div>
-
-        <div class="process-card reveal-on-scroll">
-          <div class="process-step-num">5</div>
-          <h3 class="process-step-title">Bảo Hành & Đồng Hành</h3>
-          <p class="process-step-desc">Kích hoạt bảo hành điện tử chính hãng, bảo trì định kỳ nhắc lịch tự động và hỗ trợ kỹ thuật 24/7.</p>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- ================= FAQ SECTION ================= -->
-  <section class="section-padding" id="faq" style="background: #FFFFFF;">
-    <div class="container">
-      <div class="section-header reveal-on-scroll">
-        <span class="section-tag">Giải Đáp Thắc Mắc</span>
-        <h2 class="section-title">Câu Hỏi Thường Gặp</h2>
-        <p class="section-subtitle">Những băn khoăn phổ biến nhất của các gia chủ khi cân nhắc hệ thống điều hòa & khí tươi.</p>
-      </div>
-
-      <div class="faq-list">
-        <div class="faq-item active reveal-on-scroll">
-          <button class="faq-question">
-            <span>Nhà tôi đã hoàn thiện nội thất thì có lắp được điều hòa giấu trần và cấp khí tươi không?</span>
-            <svg class="faq-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="6 9 12 15 18 9"/></svg>
-          </button>
-          <div class="faq-answer">
-            <p>Hoàn toàn có thể. Kỹ sư của Minh Việt sẽ đến khảo sát trực tiếp trần thạch cao và hạ tầng hiện hữu để đưa ra phương án đi ống gió thông minh nhất, hạn chế tối đa việc cắt sửa trần mà vẫn giữ nguyên 100% tính thẩm mỹ ban đầu của ngôi nhà.</p>
-          </div>
-        </div>
-
-        <div class="faq-item reveal-on-scroll">
-          <button class="faq-question">
-            <span>Chi phí lắp đặt điều hòa trung tâm VRV/VRF so với điều hòa cục bộ có chênh lệch nhiều không?</span>
-            <svg class="faq-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="6 9 12 15 18 9"/></svg>
-          </button>
-          <div class="faq-answer">
-            <p>Chi phí đầu tư ban đầu cho hệ thống giấu trần nối ống gió cao hơn khoảng 20-30% so với máy treo tường. Tuy nhiên về lâu dài, hệ thống trung tâm tiết kiệm 30-35% điện năng, độ bền gấp đôi (15-20 năm), giải phóng hoàn toàn ban công (chỉ dùng 1 dàn nóng) và nâng tầm giá trị chuyển nhượng của bất động sản.</p>
-          </div>
-        </div>
-
-        <div class="faq-item reveal-on-scroll">
-          <button class="faq-question">
-            <span>Việc khảo sát thực tế và lên bản vẽ thiết kế 2D có mất phí không?</span>
-            <svg class="faq-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="6 9 12 15 18 9"/></svg>
-          </button>
-          <div class="faq-answer">
-            <p>Hoàn toàn <strong>MIỄN PHÍ 100%</strong>. Chúng tôi chỉ ký hợp đồng thi công khi bạn đã hoàn toàn hài lòng với giải pháp bố trí cửa gió và bảng dự toán chi tiết rõ ràng không phát sinh.</p>
-          </div>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- ================= FOOTER ================= -->
-  <footer class="footer">
-    <div class="container">
-      <div class="footer-grid">
-        <div class="footer-col">
-          <div class="brand-wrapper" style="margin-bottom: 20px;">
-            <div class="brand-logo-img-box" style="padding: 8px 18px; box-shadow: 0 6px 24px rgba(0, 136, 204, 0.4);">
-              <img src="assets/logo-minh-viet.webp" alt="Cơ Điện Lạnh Minh Việt" style="height: 48px;">
-            </div>
-            <div class="brand-text-block">
-              <div class="brand-company-title" style="font-size: 1.18rem;">CƠ ĐIỆN LẠNH <span>MINH VIỆT</span></div>
-              <div class="brand-company-sub" style="font-size: 0.72rem;">HVAC Engineering Solutions</div>
-            </div>
-          </div>
-          <p style="font-size: 0.9rem; line-height: 1.6; margin-bottom: 20px;">
-            <strong>Công ty Cổ Phần Cơ Điện Lạnh Minh Việt</strong> – Đơn vị tiên phong cung cấp giải pháp tổng thể về điều hòa không khí trung tâm, hệ thống thông gió cấp khí tươi và xử lý vi khí hậu cao cấp cho công trình biệt thự, penthouse và tòa nhà.
-          </p>
-        </div>
-
-        <div class="footer-col">
-          <h5>Giải Pháp & Dịch Vụ</h5>
-          <ul class="footer-links">
-            <li><a href="#solutions">Điều hòa trung tâm VRV/VRF</a></li>
-            <li><a href="#solutions">Cấp khí tươi lọc bụi mịn ERV</a></li>
-            <li><a href="#solutions">Điều hòa Multi & Giấu trần</a></li>
-            <li><a href="#calculator">Tính tải nhiệt & Công suất BTU</a></li>
-            <li><a href="#khao-sat-nhu-cau">Khảo sát nhu cầu nhanh</a></li>
-            <li><a href="#solutions">Bảo trì & Vệ sinh HVAC định kỳ</a></li>
-          </ul>
-        </div>
-
-        <div class="footer-col">
-          <h5>Về Chúng Tôi</h5>
-          <ul class="footer-links">
-            <li><a href="#products">Sản phẩm Daikin</a></li>
-            <li><a href="#projects">Dự án đã triển khai</a></li>
-            <li><a href="#process">Quy trình làm việc</a></li>
-            <li><a href="#benefits">Cam kết chất lượng</a></li>
-            <li><a href="#gui-ban-ve">Gửi bản vẽ báo giá</a></li>
-            <li><a href="#faq">Câu hỏi thường gặp</a></li>
-          </ul>
-        </div>
-
-        <div class="footer-col">
-          <h5>Liên Hệ Trực Tiếp</h5>
-          <p style="font-size: 0.88rem; margin-bottom: 10px;">📍 <strong>VPGD:</strong> Số 17, TT27B, KDT Sudico Nam An Khánh, An Khánh, Hà Nội</p>
-          <p style="font-size: 0.88rem; margin-bottom: 10px;">📞 <strong>Hotline:</strong> <a href="tel:0934506191" class="footer-contact-link">0934 506 191</a></p>
-          <p style="font-size: 0.88rem; margin-bottom: 10px;">✉️ <strong>Email:</strong> <a href="mailto:contact@minhvietco.vn" class="footer-contact-link">contact@minhvietco.vn</a></p>
-          <p style="font-size: 0.88rem;">🕒 <strong>Hỗ trợ kỹ thuật:</strong> 24/7</p>
-        </div>
-      </div>
-
-      <div class="footer-bottom">
-        <div>© 2026 Công Ty Cổ Phần Cơ Điện Lạnh Minh Việt. All rights reserved.</div>
-        <div>Chuẩn mực không khí sạch cho ngôi nhà Việt</div>
-      </div>
-
-      <!-- Còn thiếu ngày cấp GCN ĐKDN và chức vụ cụ thể của người đại diện; bổ sung khi có. -->
-      <p class="footer-legal">
-        Công ty Cổ Phần Cơ Điện Lạnh Minh Việt · MST/GCN ĐKDN số: <b>0107250274</b>
-        · Địa chỉ: Số nhà 15B, ngõ 191, đường Giáp Bát, Phường Giáp Bát, Quận Hoàng Mai, TP Hà Nội
-        · Người đại diện: Ông Đỗ Thành Nam
-      </p>
-    </div>
-  </footer>
-
-  <!-- ================= CHATBOT TƯ VẤN ================= -->
-  <div class="mv-chat-window" id="mvChatWindow" role="dialog" aria-label="Chat tư vấn Minh Việt HVAC" aria-hidden="true">
-    <div class="mv-chat-header">
-      <div class="mv-chat-header-info">
-        <div class="mv-chat-avatar">
-          <img src="assets/logo-minh-viet.webp" alt="">
-        </div>
-        <div>
-          <div class="mv-chat-title">Trợ Lý Minh Việt HVAC</div>
-          <div class="mv-chat-status"><span class="mv-chat-dot"></span> Đang hoạt động</div>
-        </div>
-      </div>
-      <button type="button" class="mv-chat-close-btn" id="mvChatCloseBtn" aria-label="Đóng chat">✕</button>
-    </div>
-
-    <div class="mv-chat-messages" id="mvChatMessages"></div>
-
-    <div class="mv-chat-quick-replies" id="mvChatQuickReplies"></div>
-
-    <form class="mv-chat-input-row" id="mvChatForm" novalidate>
-      <input type="text" id="mvChatInput" class="mv-chat-input" placeholder="Nhập câu hỏi của anh/chị..." autocomplete="off">
-      <button type="submit" class="mv-chat-send-btn" aria-label="Gửi câu hỏi">
-        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><line x1="22" y1="2" x2="11" y2="13"/><polygon points="22 2 15 22 11 13 2 9 22 2"/></svg>
-      </button>
-    </form>
-  </div>
-
-  <!-- ================= FLOATING ACTION BUTTONS ================= -->
-  <div class="floating-contact-widget">
-    <button class="float-btn float-chat" id="chatbotLauncherBtn" title="Chat tư vấn Minh Việt HVAC" aria-label="Mở chat tư vấn Minh Việt HVAC">
-      <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"/></svg>
-      <span class="chat-launcher-dot"></span>
-    </button>
-    <button class="float-btn float-back-to-top" id="backToTopBtn" title="Về đầu trang">
-      <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="18 15 12 9 6 15"/></svg>
-    </button>
-    <div class="float-zalo-group">
-      <span class="float-zalo-label">Nhắn Zalo</span>
-      <a href="https://zalo.me/0934506191" target="_blank" rel="noopener" class="float-btn float-zalo" title="Nhắn tin Zalo cho Minh Việt" aria-label="Nhắn tin Zalo cho Minh Việt">Zalo</a>
-    </div>
-    <div class="float-phone-group">
-      <span class="float-phone-number">0934 506 191</span>
-      <a href="tel:0934506191" class="float-btn float-phone" title="Gọi Hotline Ngay">
-        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
-      </a>
-    </div>
-  </div>
-
-  <!-- ================= MOBILE STICKY BOTTOM BAR ================= -->
-  <div class="mobile-bottom-bar">
-    <div class="mobile-bottom-grid">
-      <a href="tel:0934506191" class="mob-btn mob-call">
-        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
-        Gọi Điện
-      </a>
-      <a href="https://zalo.me/0934506191" target="_blank" rel="noopener" class="mob-btn mob-zalo">
-        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"/></svg>
-        Zalo
-      </a>
-      <a href="#gui-ban-ve" class="mob-btn mob-quote">
-        Gửi Bản Vẽ
-      </a>
-    </div>
-  </div>
-
-  <!-- ================= SUCCESS MODAL POPUP ================= -->
-  <div class="success-modal-overlay" id="successModal">
-    <div class="success-modal-box">
-      <div class="success-icon-check">
-        <svg width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><polyline points="20 6 9 17 4 12"/></svg>
-      </div>
-      <h3 class="success-modal-title">Gửi Yêu Cầu Thành Công!</h3>
-      <p class="success-modal-desc" id="successModalMsg">
-        Cảm ơn bạn đã gửi thông tin và bản vẽ. Kỹ sư trưởng của <strong>Minh Việt HVAC</strong> sẽ liên hệ qua điện thoại trong vòng <strong>15 - 30 phút</strong> để gửi phương án tính tải 2D và báo giá chi tiết.
-      </p>
-      <button type="button" class="btn btn-primary" id="successModalCloseBtn" style="width: 100%;">
-        Đồng Ý & Đóng
-      </button>
-    </div>
-  </div>
-
-
-  <!-- ================= PRODUCT DETAIL MODAL (VRV/VRF) ================= -->
-  <div class="product-detail-modal-overlay" id="productDetailModal">
-    <div class="product-detail-modal-box">
-      <button type="button" class="product-detail-modal-close" id="productDetailModalCloseBtn" aria-label="Đóng">✕</button>
-
-      <div class="product-detail-modal-header">
-        <div class="product-detail-modal-icon" id="productDetailIcon"></div>
-        <div>
-          <span class="product-type-badge product-detail-modal-badge" id="productDetailLabel"></span>
-          <h3 class="product-detail-modal-title" id="productDetailName"></h3>
-          <div class="product-model" id="productDetailModel"></div>
-        </div>
-      </div>
-
-      <p class="product-detail-modal-desc" id="productDetailDesc"></p>
-
-      <h4 class="product-detail-modal-subtitle">Thông Số Kỹ Thuật</h4>
-      <table class="product-detail-spec-table" id="productDetailSpecTable"></table>
-
-      <div class="product-detail-modal-footer">
-        <a href="tel:0934506191" class="btn btn-primary btn-lg" style="width: 100%;">Gọi Tư Vấn Báo Giá Cho Model Này</a>
-      </div>
-    </div>
-  </div>
-
-  <!-- JavaScript Controller -->
-  <script src="app-config.js"></script>
-  <script src="main.js"></script>
+  <script>
+    const paymentForm = document.getElementById('paymentForm');
+    const payQr = document.getElementById('payQr');
+    const payStatus = document.getElementById('payStatus');
+    const payItem = document.getElementById('payItem');
+    const payAmountLine = document.getElementById('payAmountLine');
+    const paySubmitBtn = document.getElementById('paySubmitBtn');
+    let statusTimer;
+
+    const money = (n) => Number(n || 0).toLocaleString('vi-VN') + 'đ';
+
+    function renderSelectedAmount() {
+      const opt = payItem.selectedOptions[0];
+      const price = opt && opt.value ? opt.dataset.price : '';
+      payAmountLine.innerHTML = price ? `Số tiền cần chuyển: <b>${money(price)}</b>` : '';
+    }
+
+    function showLoadError(message) {
+      payItem.innerHTML = `<option value="">${message}</option>`;
+      paySubmitBtn.disabled = true;
+      payStatus.textContent = message + ' Vui lòng liên hệ hotline 0934 506 191 để được hỗ trợ.';
+      payStatus.style.background = '#fef2f2';
+      payStatus.style.color = '#991b1b';
+      payStatus.classList.add('show');
+    }
+
+    async function loadProducts() {
+      try {
+        const res = await fetch('/api/payment-api?list=products');
+        const data = await res.json().catch(() => ({}));
+        if (!res.ok || !data.ok) {
+          showLoadError('Chưa kết nối được hệ thống thanh toán.');
+          return;
+        }
+        const products = (data.products || []).filter((p) => Number(p.price) > 0);
+        if (!products.length) {
+          showLoadError('Chưa có sản phẩm/dịch vụ nào để thanh toán.');
+          return;
+        }
+        payItem.innerHTML = '<option value="">— Chọn món hàng / dịch vụ —</option>' +
+          products.map((p) => `<option value="${p.id}" data-price="${p.price}">${p.name} — ${money(p.price)}</option>`).join('');
+        paySubmitBtn.disabled = false;
+      } catch (error) {
+        showLoadError('Không tải được danh sách sản phẩm.');
+      }
+    }
+
+    payItem.addEventListener('change', renderSelectedAmount);
+    loadProducts();
+
+    function watchPayment(order) {
+      clearInterval(statusTimer);
+      payStatus.textContent = `Đơn ${order.orderCode}: vui lòng chuyển ${Number(order.amount).toLocaleString('vi-VN')}đ với nội dung ${order.orderCode}.`;
+      payStatus.classList.add('show');
+      payQr.src = `https://vietqr.app/img?acc=17169927&bank=ACB&amount=${encodeURIComponent(order.amount)}&addInfo=${encodeURIComponent(order.orderCode)}&accountName=NGUYEN%20DUC%20THUAN&template=compact&showinfo=true&store=Minh%20Viet%20HVAC`;
+      statusTimer = setInterval(async () => {
+        const response = await fetch(`/api/payment-api?orderId=${encodeURIComponent(order.orderId)}`);
+        const current = await response.json().catch(() => ({}));
+        if (current.status === 'success') {
+          clearInterval(statusTimer);
+          payStatus.textContent = 'Chuyển khoản thành công. Cảm ơn bạn đã thanh toán cho Minh Việt HVAC!';
+        }
+      }, 5000);
+    }
+
+    paymentForm.addEventListener('submit', async (event) => {
+      event.preventDefault();
+      const button = paymentForm.querySelector('button');
+      button.disabled = true;
+      try {
+        const data = Object.fromEntries(new FormData(paymentForm));
+        const response = await fetch('/api/payment-api', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ fullName: data.fullName, phone: data.contact, productId: Number(data.productId) }) });
+        const order = await response.json();
+        if (!response.ok || !order.ok) throw new Error(order.message || 'Không thể tạo đơn.');
+        watchPayment(order);
+        paymentForm.style.display = 'none';
+      } catch (error) {
+        payStatus.textContent = error.message;
+        payStatus.style.background = '#fef2f2';
+        payStatus.style.color = '#991b1b';
+        payStatus.classList.add('show');
+      } finally { button.disabled = false; }
+    });
+
+    document.getElementById('payCopyBtn').addEventListener('click', async () => {
+      const btn = document.getElementById('payCopyBtn');
+      const accNumber = document.getElementById('payAccNumber').textContent.trim();
+      try {
+        await navigator.clipboard.writeText(accNumber);
+        btn.textContent = 'Đã chép!';
+      } catch {
+        btn.textContent = 'Lỗi, thử lại';
+      }
+      setTimeout(() => { btn.textContent = 'Sao chép'; }, 1500);
+    });
+  </script>
 </body>
 </html>

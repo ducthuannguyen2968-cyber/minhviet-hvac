@@ -1,5 +1,4 @@
 const API = '/admin/api';
-const PASSWORD_KEY = 'mv_admin_password';
 
 const state = {
   products: [],
@@ -29,66 +28,17 @@ function showToast(message, isError) {
   showToast._t = setTimeout(() => { el.classList.remove('show'); }, 3200);
 }
 
-class AuthError extends Error {}
-
 async function api(method, url, body) {
-  const password = sessionStorage.getItem(PASSWORD_KEY) || localStorage.getItem(PASSWORD_KEY);
   const res = await fetch(url, {
     method,
-    headers: Object.assign(
-      { 'x-admin-password': password || '' },
-      body ? { 'Content-Type': 'application/json' } : {}
-    ),
+    headers: body ? { 'Content-Type': 'application/json' } : undefined,
     body: body ? JSON.stringify(body) : undefined,
   });
-  if (res.status === 401) {
-    clearStoredPassword();
-    showLogin();
-    throw new AuthError('Sai mật khẩu hoặc phiên đã hết hạn.');
-  }
   if (res.status === 204) return null;
   const data = await res.json().catch(() => ({}));
   if (!res.ok) throw new Error(data.error || 'Đã có lỗi xảy ra.');
   return data;
 }
-
-// ---------------- Đăng nhập / đăng xuất ----------------
-
-function clearStoredPassword() {
-  sessionStorage.removeItem(PASSWORD_KEY);
-  localStorage.removeItem(PASSWORD_KEY);
-}
-
-function showLogin() {
-  document.getElementById('adminApp').classList.add('hidden');
-  document.getElementById('loginScreen').classList.remove('hidden');
-}
-
-function showAdminApp() {
-  document.getElementById('loginScreen').classList.add('hidden');
-  document.getElementById('adminApp').classList.remove('hidden');
-}
-
-document.getElementById('loginForm').addEventListener('submit', async (e) => {
-  e.preventDefault();
-  const password = document.getElementById('loginPassword').value;
-  const errEl = document.getElementById('loginError');
-  errEl.textContent = '';
-  sessionStorage.setItem(PASSWORD_KEY, password);
-  try {
-    await loadAll();
-    localStorage.setItem(PASSWORD_KEY, password);
-    showAdminApp();
-  } catch (err) {
-    clearStoredPassword();
-    errEl.textContent = err instanceof AuthError ? 'Sai mật khẩu.' : err.message;
-  }
-});
-
-document.getElementById('btnLogout').addEventListener('click', () => {
-  clearStoredPassword();
-  showLogin();
-});
 
 // ---------------- Tabs ----------------
 
@@ -209,7 +159,7 @@ function openModal(title, fieldsHtml, onSubmit) {
       await onSubmit(new FormData(modalForm));
       closeModal();
     } catch (err) {
-      if (!(err instanceof AuthError)) showToast(err.message, true);
+      showToast(err.message, true);
     } finally {
       submitBtn.disabled = false;
     }
@@ -264,6 +214,7 @@ window.openProductModal = function (id) {
     showToast('Đã lưu sản phẩm.');
   });
 
+  // Toggle stock field theo loại sản phẩm
   const typeSelect = document.getElementById('fProductType');
   const stockWrap = document.getElementById('fStockWrap');
   const stockInput = stockWrap.querySelector('input');
@@ -285,7 +236,7 @@ window.removeProduct = async function (id) {
     await loadAll();
     showToast('Đã xoá sản phẩm.');
   } catch (err) {
-    if (!(err instanceof AuthError)) showToast(err.message, true);
+    showToast(err.message, true);
   }
 };
 
@@ -325,7 +276,7 @@ window.removeCustomer = async function (id) {
     await loadAll();
     showToast('Đã xoá khách hàng.');
   } catch (err) {
-    if (!(err instanceof AuthError)) showToast(err.message, true);
+    showToast(err.message, true);
   }
 };
 
@@ -393,20 +344,10 @@ window.removeOrder = async function (id) {
     await loadAll();
     showToast('Đã xoá đơn hàng.');
   } catch (err) {
-    if (!(err instanceof AuthError)) showToast(err.message, true);
+    showToast(err.message, true);
   }
 };
 
 // ---------------- Init ----------------
 
-(async function init() {
-  const savedPassword = localStorage.getItem(PASSWORD_KEY);
-  if (!savedPassword) { showLogin(); return; }
-  sessionStorage.setItem(PASSWORD_KEY, savedPassword);
-  try {
-    await loadAll();
-    showAdminApp();
-  } catch (err) {
-    showLogin();
-  }
-})();
+loadAll().catch((err) => showToast(err.message, true));

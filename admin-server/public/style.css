@@ -22,38 +22,13 @@ body {
   color: var(--ink);
 }
 
-.hidden { display: none !important; }
-
-/* ===== Đăng nhập ===== */
-.login-screen {
-  min-height: 100vh;
-  display: flex; align-items: center; justify-content: center;
-  background: var(--navy-dark);
-  padding: 20px;
-}
-.login-box {
-  background: #fff;
-  border-radius: 14px;
-  padding: 32px 28px;
-  width: 100%; max-width: 360px;
-  box-shadow: 0 24px 48px -8px rgba(0,0,0,.35);
-}
-.login-box h1 { margin: 0 0 2px; font-size: 1.2rem; color: var(--navy); }
-.login-sub { margin: 0 0 20px; color: var(--muted); font-size: 0.85rem; }
-
 .topbar {
   background: var(--navy);
   color: #fff;
   padding: 20px 28px;
-  display: flex; align-items: center; justify-content: space-between; gap: 12px;
 }
-.topbar h1 { margin: 0; font-size: 1.2rem; }
-.btn-logout {
-  border: 1px solid rgba(255,255,255,.35);
-  background: transparent; color: #fff;
-  padding: 7px 14px; border-radius: 8px; font-size: 0.82rem; cursor: pointer;
-}
-.btn-logout:hover { background: rgba(255,255,255,.12); }
+.topbar h1 { margin: 0 0 4px; font-size: 1.3rem; }
+.topbar-note { margin: 0; font-size: 0.85rem; color: #B9C6E6; }
 
 .tabs {
   display: flex;
@@ -142,7 +117,7 @@ tbody tr:hover { background: #FAFBFF; }
 .pill-digital { background: #F0FDF4; color: var(--ok); }
 .pill-service { background: #FFF7ED; color: var(--warn); }
 .pill-pending { background: #F1F5F9; color: var(--muted); }
-.pill-success { background: #EFF6FF; color: #1D4ED8; }
+.pill-paid { background: #EFF6FF; color: #1D4ED8; }
 .pill-completed { background: #F0FDF4; color: var(--ok); }
 .pill-cancelled { background: var(--danger-bg); color: var(--danger); }
 
@@ -186,7 +161,7 @@ tbody tr:hover { background: #FAFBFF; }
   font-family: inherit;
 }
 .field textarea { resize: vertical; min-height: 60px; }
-.field-error { color: var(--danger); font-size: 0.8rem; margin-top: 4px; min-height: 1.1em; }
+.field-error { color: var(--danger); font-size: 0.8rem; margin-top: 4px; }
 .form-actions { display: flex; justify-content: flex-end; gap: 8px; margin-top: 18px; }
 
 .toast {
