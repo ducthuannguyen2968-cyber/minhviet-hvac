@@ -25,6 +25,7 @@ function ensureSchema() {
         name TEXT NOT NULL,
         phone TEXT NOT NULL UNIQUE,
         zalo TEXT,
+        email TEXT,
         registered_at TEXT NOT NULL DEFAULT (datetime('now'))
       )`,
       `CREATE TABLE IF NOT EXISTS orders (
@@ -36,6 +37,11 @@ function ensureSchema() {
         order_date TEXT NOT NULL DEFAULT (datetime('now'))
       )`,
       ], 'write');
+      const customerCols = await client.execute("PRAGMA table_info(customers)");
+      if (!customerCols.rows.some((c) => c.name === 'email')) {
+        await client.execute('ALTER TABLE customers ADD COLUMN email TEXT');
+      }
+
       const schema = await client.execute("SELECT sql FROM sqlite_master WHERE type = 'table' AND name = 'orders'");
       if (schema.rows[0]?.sql && !schema.rows[0].sql.includes("'success'")) {
         await client.batch([
@@ -133,15 +139,24 @@ async function listCustomers() {
   return rs.rows;
 }
 
+const EMAIL_RE = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+
+function normalizeEmail(value) {
+  const email = value === undefined || value === null ? '' : String(value).trim();
+  if (email && !EMAIL_RE.test(email)) throw new HttpError(400, 'Địa chỉ email không hợp lệ.');
+  return email || null;
+}
+
 async function createCustomer(body) {
   const { name, phone, zalo } = body;
   if (!name || !String(name).trim()) throw new HttpError(400, 'Thiếu tên khách hàng.');
   if (!phone || !String(phone).trim()) throw new HttpError(400, 'Thiếu số điện thoại.');
+  const email = normalizeEmail(body.email);
   const dupRs = await client.execute({ sql: 'SELECT 1 FROM customers WHERE phone = ?', args: [String(phone).trim()] });
   if (dupRs.rows.length) throw new HttpError(409, 'Số điện thoại này đã tồn tại.');
   const rs = await client.execute({
-    sql: 'INSERT INTO customers (name, phone, zalo) VALUES (?, ?, ?) RETURNING *',
-    args: [String(name).trim(), String(phone).trim(), zalo || null],
+    sql: 'INSERT INTO customers (name, phone, zalo, email) VALUES (?, ?, ?, ?) RETURNING *',
+    args: [String(name).trim(), String(phone).trim(), zalo || null, email],
   });
   return rs.rows[0];
 }
@@ -153,6 +168,7 @@ async function updateCustomer(id, body) {
   const name = body.name !== undefined ? String(body.name).trim() : existing.name;
   const phone = body.phone !== undefined ? String(body.phone).trim() : existing.phone;
   const zalo = body.zalo !== undefined ? body.zalo : existing.zalo;
+  const email = body.email !== undefined ? normalizeEmail(body.email) : existing.email;
   if (!name) throw new HttpError(400, 'Thiếu tên khách hàng.');
   if (!phone) throw new HttpError(400, 'Thiếu số điện thoại.');
   if (phone !== existing.phone) {
@@ -160,8 +176,8 @@ async function updateCustomer(id, body) {
     if (dupRs.rows.length) throw new HttpError(409, 'Số điện thoại này đã tồn tại.');
   }
   const rs = await client.execute({
-    sql: 'UPDATE customers SET name = ?, phone = ?, zalo = ? WHERE id = ? RETURNING *',
-    args: [name, phone, zalo || null, id],
+    sql: 'UPDATE customers SET name = ?, phone = ?, zalo = ?, email = ? WHERE id = ? RETURNING *',
+    args: [name, phone, zalo || null, email, id],
   });
   return rs.rows[0];
 }
